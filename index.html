@@ -3,219 +3,568 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JM Prestige - Header Logo</title>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+<title>JM Prestige AI Solutions — Apps a Medida con Soporte SAT</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Rajdhani:wght@600&family=Exo+2:wght@300;700&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #111; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  :root {
+    --navy: #0F1F3D;
+    --navy-mid: #1B3A6B;
+    --gold: #C8960C;
+    --gold-light: #F0C040;
+    --cream: #FAF8F3;
+    --white: #FFFFFF;
+    --gray: #6B7280;
+    --light: #F3F4F6;
+  }
 
-.header-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: #0d1b2a;
-  border-radius: 14px;
-  width: 100%;
-  max-width: 800px;
-  height: 160px;
-}
-.skyline-bg {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 100%;
-  opacity: 0.07;
-}
-.bg-glow {
-  position: absolute;
-  width: 260px; height: 180px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,166,35,0.15) 0%, transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  animation: pulse-glow 3s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes pulse-glow {
-  0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
-}
-.scan-line {
-  position: absolute;
-  left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(245,166,35,0.3) 50%, transparent 100%);
-  animation: scan 5s linear infinite;
-  pointer-events: none;
-}
-@keyframes scan {
-  0% { top: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-.corner { position: absolute; width: 16px; height: 16px; border-color: rgba(245,166,35,0.35); border-style: solid; }
-.c-tl { top: 10px; left: 10px; border-width: 1.5px 0 0 1.5px; }
-.c-tr { top: 10px; right: 10px; border-width: 1.5px 1.5px 0 0; }
-.c-bl { bottom: 10px; left: 10px; border-width: 0 0 1.5px 1.5px; }
-.c-br { bottom: 10px; right: 10px; border-width: 0 1.5px 1.5px 0; }
-.content {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  z-index: 2;
-}
-.pin-wrap {
-  animation: float 4s ease-in-out infinite;
-  flex-shrink: 0;
-}
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-.pin-svg {
-  width: 54px; height: 54px;
-  filter: drop-shadow(0 0 10px rgba(255,165,0,0.55));
-  animation: pin-shine 2.5s ease-in-out infinite;
-}
-@keyframes pin-shine {
-  0%,100% { filter: drop-shadow(0 0 8px rgba(255,165,0,0.45)); }
-  50% { filter: drop-shadow(0 0 20px rgba(255,200,50,0.85)); }
-}
-.text-block { display: flex; flex-direction: column; gap: 2px; }
-.logo-text-main {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 600;
-  font-size: 1.85rem;
-  letter-spacing: 0.05em;
-  color: #ffffff;
-  line-height: 1;
-}
-.logo-text-main span { color: #f5a623; }
-.logo-sub {
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 300;
-  font-size: 0.7rem;
-  letter-spacing: 0.28em;
-  color: rgba(255,255,255,0.5);
-  text-transform: uppercase;
-}
-.tagline {
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 300;
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  color: rgba(245,166,35,0.65);
-  text-transform: uppercase;
-  margin-top: 4px;
-  padding-top: 4px;
-  border-top: 0.5px solid rgba(245,166,35,0.2);
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR CON LOGO ANIMADO ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6%;
+    background: #0d1b2a;
+    border-bottom: 1px solid rgba(200,150,12,0.3);
+    height: 80px;
+    overflow: hidden;
+  }
+
+  /* Skyline fondo navbar */
+  .nav-skyline {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100%;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  /* Glow fondo */
+  .nav-glow {
+    position: absolute;
+    width: 300px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
+    top: 50%; left: 30%;
+    transform: translate(-50%, -50%);
+    animation: navpulse 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes navpulse {
+    0%,100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); }
+  }
+
+  /* Scan line */
+  .nav-scan {
+    position: absolute;
+    left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(245,166,35,0.25) 50%, transparent 100%);
+    animation: navscan 5s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes navscan {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* Esquinas decorativas */
+  .nav-corner { position: absolute; width: 12px; height: 12px; border-color: rgba(245,166,35,0.3); border-style: solid; }
+  .nc-tl { top: 8px; left: 8px; border-width: 1.5px 0 0 1.5px; }
+  .nc-tr { top: 8px; right: 8px; border-width: 1.5px 1.5px 0 0; }
+  .nc-bl { bottom: 8px; left: 8px; border-width: 0 0 1.5px 1.5px; }
+  .nc-br { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
+
+  /* Logo contenido */
+  .nav-logo-wrap {
+    display: flex; align-items: center; gap: 0.8rem;
+    position: relative; z-index: 2;
+  }
+  .nav-pin {
+    width: 38px; height: 38px;
+    animation: navfloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(255,165,0,0.5));
+  }
+  @keyframes navfloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  .nav-text-block { display: flex; flex-direction: column; gap: 1px; }
+  .nav-logo-main {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600; font-size: 1.35rem;
+    letter-spacing: 0.05em; color: #fff; line-height: 1;
+  }
+  .nav-logo-main span { color: #f5a623; }
+  .nav-logo-sub {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300; font-size: 0.58rem;
+    letter-spacing: 0.25em; color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+  }
+
+  .nav-cta {
+    background: var(--gold); color: var(--navy);
+    padding: 0.6rem 1.4rem; border-radius: 4px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+    position: relative; z-index: 2;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    padding: 8rem 6% 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -40%; right: -20%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(200,150,12,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -30%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(27,58,107,0.6) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(200,150,12,0.15);
+    border: 1px solid rgba(200,150,12,0.4);
+    color: var(--gold-light);
+    padding: 0.4rem 1rem; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 500;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--white); margin-bottom: 1.5rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+
+  .hero-sub {
+    font-size: 1.15rem; font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7; max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 0.9rem 2rem; border-radius: 5px;
+    font-weight: 700; font-size: 1rem;
+    text-decoration: none; transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(200,150,12,0.4);
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,150,12,0.5); }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    padding: 0.9rem 2rem; border-radius: 5px;
+    font-weight: 500; font-size: 1rem;
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; font-weight: 900; color: var(--gold);
+  }
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 0.2rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PROPUESTA DE VALOR ── */
+  .value { padding: 6rem 6%; background: var(--white); }
+  .section-tag {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; color: var(--navy);
+    line-height: 1.15; margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: var(--gray);
+    max-width: 540px; line-height: 1.7; margin-bottom: 3.5rem;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .value-card {
+    background: var(--cream);
+    border: 1px solid rgba(15,31,61,0.08);
+    border-radius: 10px; padding: 2rem;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .value-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .value-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,31,61,0.1); }
+  .value-card:hover::before { transform: scaleX(1); }
+  .value-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .value-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+  .value-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── APPS ── */
+  .apps { padding: 6rem 6%; background: var(--cream); }
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .app-card {
+    background: var(--white);
+    border: 1px solid rgba(15,31,61,0.08);
+    border-radius: 12px; padding: 1.8rem;
+    transition: all 0.3s; cursor: default;
+  }
+  .app-card:hover { transform: translateY(-5px); box-shadow: 0 16px 50px rgba(15,31,61,0.12); }
+  .app-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .app-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; background: var(--navy); color: var(--gold); flex-shrink: 0;
+  }
+  .app-name { font-weight: 700; font-size: 1rem; color: var(--navy); }
+  .app-sector { font-size: 0.78rem; color: var(--gold); font-weight: 500; }
+  .app-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.6; margin-bottom: 1rem; }
+  .app-sat {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(200,150,12,0.1); color: var(--gold);
+    font-size: 0.78rem; font-weight: 600;
+    padding: 0.3rem 0.8rem; border-radius: 20px;
+    border: 1px solid rgba(200,150,12,0.3);
+  }
+  .app-sat::before { content: '✓'; }
+
+  /* ── SAT ── */
+  .sat { padding: 6rem 6%; background: var(--navy); position: relative; overflow: hidden; }
+  .sat::before {
+    content: '';
+    position: absolute; top: -50%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,150,12,0.08) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .sat .section-title { color: var(--white); }
+  .sat .section-sub { color: rgba(255,255,255,0.6); }
+  .sat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem; margin-top: 3rem; position: relative; z-index: 2;
+  }
+  .sat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 1.8rem; transition: all 0.3s;
+  }
+  .sat-card:hover {
+    background: rgba(200,150,12,0.08);
+    border-color: rgba(200,150,12,0.4); transform: translateY(-3px);
+  }
+  .sat-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .sat-name { font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: 0.8rem; }
+  .sat-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ── PROCESO ── */
+  .proceso { padding: 6rem 6%; background: var(--white); }
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; max-width: 680px; }
+  .step {
+    display: flex; gap: 2rem; align-items: flex-start;
+    padding-bottom: 2.5rem; position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute; left: 20px; top: 48px; bottom: 0;
+    width: 2px; background: rgba(200,150,12,0.2);
+  }
+  .step-num {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--navy); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 900;
+    flex-shrink: 0; position: relative; z-index: 1;
+    border: 2px solid rgba(200,150,12,0.3);
+  }
+  .step-content h3 { font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem; }
+  .step-content p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── CTA FINAL ── */
+  .cta-section { padding: 6rem 6%; background: var(--cream); text-align: center; }
+  .cta-box {
+    max-width: 620px; margin: 0 auto;
+    background: var(--navy); border-radius: 16px; padding: 4rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 20%, rgba(200,150,12,0.15) 0%, transparent 60%);
+  }
+  .cta-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--white); margin-bottom: 1rem; position: relative; z-index: 1;
+  }
+  .cta-box h2 span { color: var(--gold); }
+  .cta-box p {
+    color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.7;
+    margin-bottom: 2rem; position: relative; z-index: 1;
+  }
+  .cta-box .btn-primary { position: relative; z-index: 1; display: inline-block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,150,12,0.2);
+    padding: 2.5rem 6%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 900; color: var(--white);
+  }
+  .footer-brand span { color: var(--gold); }
+  footer p { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .nav-logo-main { font-size: 1.1rem; }
+    .nav-pin { width: 30px; height: 30px; }
+    .hero { padding: 7rem 5% 4rem; }
+    .value, .apps, .sat, .proceso, .cta-section { padding: 4rem 5%; }
+  }
 </style>
 </head>
 <body>
 
-<div class="header-wrap">
-  <!-- Skyline edificios muy suaves de fondo -->
-  <svg class="skyline-bg" viewBox="0 0 800 160" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+<!-- NAVBAR CON LOGO ANIMADO -->
+<nav>
+  <!-- Skyline fondo muy suave -->
+  <svg class="nav-skyline" viewBox="0 0 1200 80" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
     <g fill="white">
-      <rect x="370" y="20" width="60" height="140"/>
-      <rect x="382" y="10" width="36" height="20"/>
-      <rect x="393" y="2" width="14" height="12"/>
-      <rect x="376" y="28" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="390" y="28" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="404" y="28" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="376" y="44" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="390" y="44" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="404" y="44" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="376" y="60" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="390" y="60" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="404" y="60" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="376" y="76" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="390" y="76" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="404" y="76" width="8" height="10" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="290" y="50" width="72" height="110"/>
-      <rect x="300" y="42" width="52" height="12"/>
-      <rect x="306" y="52" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="320" y="52" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="334" y="52" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="306" y="67" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="320" y="67" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="334" y="67" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="306" y="82" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="320" y="82" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="334" y="82" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="306" y="97" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="320" y="97" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="334" y="97" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="438" y="50" width="72" height="110"/>
-      <rect x="448" y="42" width="52" height="12"/>
-      <rect x="450" y="52" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="464" y="52" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="478" y="52" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="450" y="67" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="464" y="67" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="478" y="67" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="450" y="82" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="464" y="82" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="478" y="82" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="450" y="97" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="464" y="97" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="478" y="97" width="8" height="9" fill="#0d1b2a" opacity="0.5"/>
-      <rect x="220" y="80" width="50" height="80"/>
-      <rect x="530" y="80" width="50" height="80"/>
-      <rect x="140" y="105" width="35" height="55"/>
-      <rect x="185" y="98" width="28" height="62"/>
-      <rect x="597" y="98" width="28" height="62"/>
-      <rect x="635" y="105" width="35" height="55"/>
-      <rect x="60" y="118" width="22" height="42"/>
-      <rect x="90" y="112" width="18" height="48"/>
-      <rect x="692" y="112" width="18" height="48"/>
-      <rect x="720" y="118" width="22" height="42"/>
+      <rect x="540" y="5" width="30" height="75"/><rect x="548" y="0" width="14" height="8"/>
+      <rect x="430" y="20" width="36" height="60"/><rect x="436" y="14" width="24" height="8"/>
+      <rect x="580" y="20" width="36" height="60"/><rect x="586" y="14" width="24" height="8"/>
+      <rect x="340" y="32" width="28" height="48"/>
+      <rect x="668" y="32" width="28" height="48"/>
+      <rect x="260" y="42" width="22" height="38"/>
+      <rect x="750" y="42" width="22" height="38"/>
+      <rect x="180" y="52" width="18" height="28"/>
+      <rect x="840" y="52" width="18" height="28"/>
+      <rect x="100" y="58" width="14" height="22"/>
+      <rect x="920" y="58" width="14" height="22"/>
     </g>
   </svg>
+  <div class="nav-glow"></div>
+  <div class="nav-scan"></div>
+  <div class="nav-corner nc-tl"></div>
+  <div class="nav-corner nc-tr"></div>
+  <div class="nav-corner nc-bl"></div>
+  <div class="nav-corner nc-br"></div>
 
-  <div class="bg-glow"></div>
-  <div class="scan-line"></div>
-  <div class="corner c-tl"></div>
-  <div class="corner c-tr"></div>
-  <div class="corner c-bl"></div>
-  <div class="corner c-br"></div>
-
-  <div class="content">
-    <div class="pin-wrap">
-      <svg class="pin-svg" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="pinGrad2" cx="40%" cy="30%" r="65%">
-            <stop offset="0%" stop-color="#FFD060"/>
-            <stop offset="60%" stop-color="#F5A623"/>
-            <stop offset="100%" stop-color="#C47A00"/>
-          </radialGradient>
-          <radialGradient id="shimmer2" cx="35%" cy="25%" r="40%">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
-            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-          </radialGradient>
-        </defs>
-        <path d="M36 6C24.95 6 16 14.95 16 26C16 38.5 36 66 36 66C36 66 56 38.5 56 26C56 14.95 47.05 6 36 6Z" fill="url(#pinGrad2)"/>
-        <path d="M36 6C24.95 6 16 14.95 16 26C16 38.5 36 66 36 66C36 66 56 38.5 56 26C56 14.95 47.05 6 36 6Z" fill="url(#shimmer2)"/>
-        <circle cx="36" cy="26" r="10" fill="#0d1b2a"/>
-        <circle cx="36" cy="26" r="6.5" fill="none" stroke="rgba(255,165,0,0.6)" stroke-width="1.2"/>
-        <line x1="36" y1="20" x2="36" y2="22" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
-        <line x1="36" y1="30" x2="36" y2="32" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
-        <line x1="30" y1="26" x2="32" y2="26" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
-        <line x1="40" y1="26" x2="42" y2="26" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
-        <circle cx="36" cy="26" r="2.5" fill="#F5A623"/>
-      </svg>
-    </div>
-    <div class="text-block">
-      <div class="logo-text-main">JM <span>Prestige</span></div>
-      <div class="logo-sub">AI Solutions</div>
-      <div class="tagline">Apps a medida · Soporte SAT</div>
+  <div class="nav-logo-wrap">
+    <svg class="nav-pin" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="pg" cx="40%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#FFD060"/>
+          <stop offset="60%" stop-color="#F5A623"/>
+          <stop offset="100%" stop-color="#C47A00"/>
+        </radialGradient>
+      </defs>
+      <path d="M36 6C24.95 6 16 14.95 16 26C16 38.5 36 66 36 66C36 66 56 38.5 56 26C56 14.95 47.05 6 36 6Z" fill="url(#pg)"/>
+      <circle cx="36" cy="26" r="10" fill="#0d1b2a"/>
+      <circle cx="36" cy="26" r="6.5" fill="none" stroke="rgba(255,165,0,0.6)" stroke-width="1.2"/>
+      <line x1="36" y1="20" x2="36" y2="22" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="36" y1="30" x2="36" y2="32" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="30" y1="26" x2="32" y2="26" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="40" y1="26" x2="42" y2="26" stroke="#F5A623" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="36" cy="26" r="2.5" fill="#F5A623"/>
+    </svg>
+    <div class="nav-text-block">
+      <div class="nav-logo-main">JM <span>Prestige</span></div>
+      <div class="nav-logo-sub">AI Solutions</div>
     </div>
   </div>
-</div>
+
+  <a href="#contacto" class="nav-cta">Contactar ahora</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Disponible en Lleida · Sevilla · Canarias</div>
+    <h1>Tu empresa,<br><em>digitalizada.</em><br>Con soporte real.</h1>
+    <p class="hero-sub">Desarrollamos apps a medida para pequeñas y medianas empresas. Sin complicaciones, sin grandes inversiones, con un profesional que coge el teléfono cuando lo necesitas.</p>
+    <div class="hero-btns">
+      <a href="#apps" class="btn-primary">Ver nuestras apps</a>
+      <a href="#sat" class="btn-secondary">Servicio SAT →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Apps en producción</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Idiomas de soporte</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Soporte directo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPUESTA DE VALOR -->
+<section class="value" id="valor">
+  <div class="section-tag">Por qué elegirnos</div>
+  <h2 class="section-title">No somos una agencia.<br>Somos tu socio digital.</h2>
+  <p class="section-sub">La diferencia está en el trato. Conocemos tu negocio, respondemos rápido y resolvemos el mismo día.</p>
+  <div class="value-grid">
+    <div class="value-card"><span class="value-icon">⚡</span><h3>Rápido de implementar</h3><p>Tu app funcionando en semanas, no en meses. Sin burocracia, sin reuniones interminables.</p></div>
+    <div class="value-card"><span class="value-icon">📱</span><h3>Sin instalar nada</h3><p>Todas nuestras apps son PWA: funcionan en cualquier móvil o tablet desde el navegador.</p></div>
+    <div class="value-card"><span class="value-icon">🔄</span><h3>Datos en tiempo real</h3><p>Oficina y campo sincronizados al instante. Lo que hace el conductor, lo ves tú en segundos.</p></div>
+    <div class="value-card"><span class="value-icon">🤝</span><h3>Soporte de verdad</h3><p>Un número de teléfono real. Una persona real. No un ticket de soporte que tarda 3 días.</p></div>
+    <div class="value-card"><span class="value-icon">💰</span><h3>Sin costes ocultos</h3><p>Precio cerrado para el desarrollo. SAT mensual claro desde el primer día. Sin sorpresas.</p></div>
+    <div class="value-card"><span class="value-icon">🤖</span><h3>IA integrada</h3><p>Nuestras apps incluyen inteligencia artificial donde tiene sentido: asistentes, análisis y automatizaciones.</p></div>
+  </div>
+</section>
+
+<!-- APPS -->
+<section class="apps" id="apps">
+  <div class="section-tag">Nuestras soluciones</div>
+  <h2 class="section-title">Apps que ya funcionan<br>en empresas reales</h2>
+  <p class="section-sub">Cada solución nació de un problema real de un cliente real. Todas adaptables a tu negocio.</p>
+  <div class="apps-grid">
+    <div class="app-card">
+      <div class="app-header"><div class="app-icon">🚛</div><div><div class="app-name">BarrosoApp</div><div class="app-sector">Áridos · Excavaciones</div></div></div>
+      <p class="app-desc">Albaranes digitales desde la tablet del conductor: cliente, material, cantidad, GPS, firma digital y PDF al instante. Panel de oficina en tiempo real.</p>
+      <span class="app-sat">SAT disponible</span>
+    </div>
+    <div class="app-card">
+      <div class="app-header"><div class="app-icon">🏗️</div><div><div class="app-name">ObraControl GPS</div><div class="app-sector">Construcción · RRHH</div></div></div>
+      <p class="app-desc">Fichajes con GPS de operarios en obra. Panel con mapa en tiempo real, exportación de jornadas, 6 idiomas y modo offline.</p>
+      <span class="app-sat">SAT disponible</span>
+    </div>
+    <div class="app-card">
+      <div class="app-header"><div class="app-icon">🛡️</div><div><div class="app-name">Marcius Seguridad</div><div class="app-sector">Seguridad privada</div></div></div>
+      <p class="app-desc">Rondas GPS para agentes: fichar, checkpoints, botón de pánico, informes de turno en PDF e integración con Google Sheets.</p>
+      <span class="app-sat">SAT disponible</span>
+    </div>
+    <div class="app-card">
+      <div class="app-header"><div class="app-icon">🎨</div><div><div class="app-name">PinturApp</div><div class="app-sector">Pintura · Comercio</div></div></div>
+      <p class="app-desc">Presupuestos para pintores con voz, PDF con marca del proveedor, IVA automático y envío por WhatsApp. Plantilla white-label para tiendas.</p>
+      <span class="app-sat">SAT disponible</span>
+    </div>
+    <div class="app-card">
+      <div class="app-header"><div class="app-icon">🏫</div><div><div class="app-name">AquíProu</div><div class="app-sector">Educación · Social</div></div></div>
+      <p class="app-desc">App antibullying para institutos: reporte anónimo, check-in emocional, contactos de emergencia y simulación de gravedad con IA. Trilingüe.</p>
+      <span class="app-sat">SAT disponible</span>
+    </div>
+    <div class="app-card">
+      <div class="app-header"><div class="app-icon">🗳️</div><div><div class="app-name">Panel Gáldar</div><div class="app-sector">Política · Institucional</div></div></div>
+      <p class="app-desc">Suite para concejales: quejas vecinales, mapa de incidencias, asesor IA, seguimiento de plenos y app para vecinos con bot de Telegram.</p>
+      <span class="app-sat">SAT disponible</span>
+    </div>
+  </div>
+</section>
+
+<!-- SAT -->
+<section class="sat" id="sat">
+  <div class="section-tag" style="color:var(--gold-light)">Servicio técnico</div>
+  <h2 class="section-title">SAT — Lo que nos diferencia</h2>
+  <p class="section-sub">Vendemos la app y nos quedamos contigo. Mes a mes, tu herramienta sigue creciendo con tu negocio.</p>
+  <div class="sat-grid">
+    <div class="sat-card"><div class="sat-price">49€</div><div class="sat-name">Mantenimiento básico</div><div class="sat-desc">Actualizaciones, corrección de errores y hasta 2 cambios pequeños al mes.</div></div>
+    <div class="sat-card"><div class="sat-price">99€</div><div class="sat-name">Mantenimiento completo</div><div class="sat-desc">Todo lo anterior + 4 horas de desarrollo mensual y soporte telefónico prioritario en menos de 24h.</div></div>
+    <div class="sat-card"><div class="sat-price">35€</div><div class="sat-name">Bolsa de horas</div><div class="sat-desc">Horas a consumir sin caducidad para cambios puntuales sin contrato mensual.</div></div>
+    <div class="sat-card"><div class="sat-price">150€</div><div class="sat-name">Formación y onboarding</div><div class="sat-desc">Sesión de formación para tu equipo con manual de uso personalizado incluido.</div></div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="section-tag">Cómo trabajamos</div>
+  <h2 class="section-title">De la idea a la app<br>en 5 pasos</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Primera reunión</h3><p>Entendemos tu negocio y tu problema concreto. Presencial en Lleida o videollamada. Sin coste ni compromiso.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h3>Demo o prototipo</h3><p>En muchos casos puedes ver una app similar ya funcionando antes de decidir nada.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Presupuesto cerrado</h3><p>Precio fijo para el desarrollo inicial. Sin sorpresas. Con condiciones de SAT claras desde el principio.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Desarrollo y entrega</h3><p>Entregas parciales para que veas el avance. Formación al equipo incluida en la entrega final.</p></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><h3>SAT continuo</h3><p>Soporte mensual activo. Siempre disponible por WhatsApp o teléfono para lo que necesites.</p></div></div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="contacto">
+  <div class="cta-box">
+    <h2>¿Hablamos<br><span>sin compromiso?</span></h2>
+    <p>Primera reunión gratuita, presencial en Lleida o por videollamada. Cuéntame tu negocio y te digo si tengo una solución para ti.</p>
+    <a href="https://wa.me/34000000000?text=Hola%20Juan%20Manuel%2C%20me%20interesa%20conocer%20vuestras%20apps" class="btn-primary" target="_blank">Escribir por WhatsApp →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">JM <span>Prestige</span> AI Solutions</div>
+  <p>Lleida, Cataluña · Español · Català · English</p>
+  <p>© 2026 JM Prestige AI Solutions</p>
+</footer>
 
 </body>
 </html>
