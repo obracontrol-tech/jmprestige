@@ -28,13 +28,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-cta{background:var(--gold);color:var(--navy);padding:0.6rem 1.4rem;border-radius:4px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:all 0.2s;position:relative;z-index:2;}
 .nav-cta:hover{background:var(--gold-light);transform:translateY(-1px);}
 
-/* HERO SPLIT */
+/* HERO */
 .hero{min-height:100vh;background:var(--navy);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 6% 4rem;position:relative;overflow:hidden;gap:2rem;}
 .hero-wm{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
 .wm-c{position:absolute;border-radius:50%;}
 .wm1{width:600px;height:600px;top:-150px;right:-100px;background:rgba(56,139,253,0.04);}
 .wm2{width:400px;height:400px;bottom:-100px;left:-80px;background:rgba(200,150,12,0.04);}
-.wm3{width:200px;height:200px;top:40%;right:35%;background:rgba(56,139,253,0.03);}
 .hero-lines{position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(56,139,253,0.018) 40px,rgba(56,139,253,0.018) 41px);}
 .hero-left{position:relative;z-index:2;}
 .hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(200,150,12,0.15);border:1px solid rgba(200,150,12,0.4);color:var(--gold-light);padding:0.4rem 1rem;border-radius:20px;font-size:0.82rem;font-weight:500;margin-bottom:2rem;animation:fadeUp 0.6s ease both;}
@@ -53,7 +52,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .stat-label{font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:0.2rem;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-/* MÓVIL HERO DERECHA */
+/* MÓVIL HERO */
 .hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;animation:fadeUp 0.8s 0.3s ease both;}
 .phone-halo{position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(56,139,253,0.1) 0%,transparent 70%);animation:halopulse 4s ease-in-out infinite;}
 @keyframes halopulse{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.1);opacity:1}}
@@ -90,17 +89,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .pb-tri{width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-bottom:6px solid #1e2d4a;}
 .pb-dot{width:5px;height:5px;border-radius:50%;background:#1e2d4a;}
 .pb-sq{width:6px;height:6px;border:1px solid #1e2d4a;border-radius:1.5px;}
-
-/* Badges flotantes */
-.phone-badge{position:absolute;background:rgba(10,22,40,0.92);border:1px solid rgba(56,139,253,0.3);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:8px;backdrop-filter:blur(4px);}
+.phone-badge{position:absolute;background:rgba(10,22,40,0.92);border:1px solid rgba(56,139,253,0.3);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:8px;}
 .pb-icon{font-size:16px;}
 .pb-text{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:600;color:rgba(255,255,255,0.8);}
 .pb-sub{font-family:'Exo 2',sans-serif;font-size:8px;color:rgba(255,255,255,0.35);}
-.badge-tl{top:10px;left:-30px;}
-.badge-tr{top:80px;right:-40px;}
-.badge-br{bottom:40px;right:-45px;}
+.badge-tl{top:10px;left:-30px;}.badge-tr{top:80px;right:-40px;}.badge-br{bottom:40px;right:-45px;}
 
-/* RESTO SECCIONES */
+/* VALOR */
 .value{padding:6rem 6%;background:var(--white);}
 .section-tag{font-size:0.78rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--navy);line-height:1.15;margin-bottom:1rem;}
@@ -113,17 +108,145 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .value-icon{font-size:2rem;margin-bottom:1rem;display:block;}
 .value-card h3{font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:0.6rem;}
 .value-card p{font-size:0.9rem;color:var(--gray);line-height:1.6;}
+
+/* APPS */
 .apps{padding:6rem 6%;background:var(--cream);}
 .apps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3rem;}
-.app-card{background:var(--white);border:1px solid rgba(15,31,61,0.08);border-radius:12px;padding:1.8rem;transition:all 0.3s;}
+.app-card{background:var(--white);border:1px solid rgba(15,31,61,0.08);border-radius:12px;overflow:hidden;transition:all 0.3s;cursor:pointer;}
 .app-card:hover{transform:translateY(-5px);box-shadow:0 16px 50px rgba(15,31,61,0.12);}
-.app-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
-.app-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:var(--navy);color:var(--gold);flex-shrink:0;}
-.app-name{font-weight:700;font-size:1rem;color:var(--navy);}
-.app-sector{font-size:0.78rem;color:var(--gold);font-weight:500;}
-.app-desc{font-size:0.88rem;color:var(--gray);line-height:1.6;margin-bottom:1rem;}
-.app-sat{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(200,150,12,0.1);color:var(--gold);font-size:0.78rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:20px;border:1px solid rgba(200,150,12,0.3);}
+
+/* Miniscreen dentro de card */
+.app-screen-preview{height:120px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.app-card-body{padding:1.4rem 1.4rem 1rem;}
+.app-header{display:flex;align-items:center;gap:0.9rem;margin-bottom:0.8rem;}
+.app-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:var(--navy);color:var(--gold);flex-shrink:0;}
+.app-name{font-weight:700;font-size:0.95rem;color:var(--navy);}
+.app-sector{font-size:0.75rem;color:var(--gold);font-weight:500;}
+.app-desc{font-size:0.85rem;color:var(--gray);line-height:1.6;margin-bottom:1rem;}
+.app-footer{display:flex;align-items:center;justify-content:space-between;}
+.app-sat{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(200,150,12,0.1);color:var(--gold);font-size:0.75rem;font-weight:600;padding:0.25rem 0.7rem;border-radius:20px;border:1px solid rgba(200,150,12,0.3);}
 .app-sat::before{content:'✓';}
+.btn-demo{background:var(--navy);color:var(--white);border:none;padding:0.45rem 1rem;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.4rem;}
+.btn-demo:hover{background:#1B3A6B;}
+.btn-demo::after{content:'→';}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,15,30,0.85);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:20px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn 0.3s ease;}
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;border-radius:50%;background:rgba(15,31,61,0.08);border:none;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s;}
+.modal-close:hover{background:rgba(15,31,61,0.15);}
+.modal-inner{display:grid;grid-template-columns:1fr 1fr;min-height:500px;}
+.modal-left{padding:2.5rem;display:flex;flex-direction:column;}
+.modal-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:var(--navy);color:var(--gold);margin-bottom:1.2rem;}
+.modal-tag{font-size:0.72rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--navy);margin-bottom:0.8rem;line-height:1.2;}
+.modal-desc{font-size:0.92rem;color:var(--gray);line-height:1.7;margin-bottom:1.5rem;}
+.modal-features{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
+.modal-feat{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.88rem;color:var(--navy);}
+.feat-check{color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px;}
+.modal-sat{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(200,150,12,0.1);color:var(--gold);font-size:0.8rem;font-weight:600;padding:0.4rem 1rem;border-radius:20px;border:1px solid rgba(200,150,12,0.3);margin-top:auto;}
+.modal-sat::before{content:'✓ ';}
+.modal-right{background:var(--navy);border-radius:0 20px 20px 0;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.modal-right::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(56,139,253,0.03) 30px,rgba(56,139,253,0.03) 31px);}
+.modal-screen-title{font-family:'Exo 2',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.2rem;position:relative;z-index:2;}
+.mini-phone{width:140px;background:#0d1420;border-radius:22px;border:1.5px solid #1e2d4a;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);position:relative;z-index:2;}
+.mini-notch{height:12px;background:#0d1420;display:flex;align-items:center;justify-content:center;}
+.mini-cam{width:5px;height:5px;border-radius:50%;background:#1a2540;}
+.mini-screen{display:flex;flex-direction:column;overflow:hidden;}
+.mini-bottom{height:16px;background:#0d1420;display:flex;align-items:center;justify-content:center;gap:10px;}
+.mini-btri{width:0;height:0;border-left:2.5px solid transparent;border-right:2.5px solid transparent;border-bottom:4px solid #1e2d4a;}
+.mini-bdot{width:4px;height:4px;border-radius:50%;background:#1e2d4a;}
+.mini-bsq{width:4px;height:4px;border:1px solid #1e2d4a;border-radius:1px;}
+
+/* Screens de cada app */
+/* BarrosoApp screen */
+.screen-barroso{background:#1a2a1a;padding:8px;min-height:220px;}
+.bs-header{background:#f5a623;border-radius:6px;padding:6px 8px;display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.bs-logo{font-size:12px;}
+.bs-title{font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;color:#1a2a1a;}
+.bs-field{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:5px;padding:5px 7px;margin-bottom:4px;}
+.bs-label{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;}
+.bs-value{font-family:'Exo 2',sans-serif;font-size:9px;font-weight:600;color:#fff;}
+.bs-gps{display:flex;gap:4px;margin-bottom:4px;}
+.bs-gps-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;margin-top:2px;flex-shrink:0;}
+.bs-gps-txt{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.5);}
+.bs-btn{background:#f5a623;border:none;border-radius:5px;padding:7px;width:100%;font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;color:#1a2a1a;text-align:center;margin-top:4px;}
+/* ObraControl screen */
+.screen-obra{background:#0d1b2a;padding:8px;min-height:220px;}
+.oc-bar{background:rgba(56,139,253,0.2);border-radius:5px;padding:5px 7px;margin-bottom:5px;display:flex;align-items:center;justify-content:space-between;}
+.oc-name{font-family:'Exo 2',sans-serif;font-size:8px;font-weight:700;color:#fff;}
+.oc-live{width:5px;height:5px;border-radius:50%;background:#4ade80;}
+.oc-map{background:rgba(56,139,253,0.1);border:1px solid rgba(56,139,253,0.2);border-radius:5px;height:60px;margin-bottom:5px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.oc-map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,139,253,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(56,139,253,0.1) 1px,transparent 1px);background-size:12px 12px;}
+.oc-pin{font-size:14px;position:relative;z-index:1;}
+.oc-worker{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.04);border-radius:4px;padding:4px 6px;margin-bottom:3px;}
+.oc-avatar{width:14px;height:14px;border-radius:50%;background:#388bfd;display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:7px;font-weight:700;color:#fff;flex-shrink:0;}
+.oc-wname{font-family:'Exo 2',sans-serif;font-size:8px;color:rgba(255,255,255,0.7);flex:1;}
+.oc-status{font-size:7px;color:#4ade80;}
+/* Marcius screen */
+.screen-marcius{background:#1a1a2e;padding:8px;min-height:220px;}
+.mc-header{display:flex;align-items:center;gap:5px;margin-bottom:6px;}
+.mc-shield{width:20px;height:20px;background:#c8960c;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;}
+.mc-title{font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;color:#fff;}
+.mc-panic{background:#dc2626;border:none;border-radius:6px;padding:8px;width:100%;font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;color:#fff;text-align:center;margin-bottom:5px;letter-spacing:0.05em;}
+.mc-checkpoint{display:flex;align-items:center;gap:5px;padding:4px 6px;background:rgba(255,255,255,0.04);border-radius:4px;margin-bottom:3px;border-left:2px solid #c8960c;}
+.mc-check-icon{font-size:9px;}
+.mc-check-name{font-family:'Exo 2',sans-serif;font-size:8px;color:rgba(255,255,255,0.7);}
+.mc-check-time{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.35);margin-left:auto;}
+/* PinturApp screen */
+.screen-pintur{background:#f8f4ff;padding:8px;min-height:220px;}
+.pt-header{background:#7c3aed;border-radius:6px;padding:6px 8px;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.pt-logo{font-size:11px;}
+.pt-title{font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;color:#fff;}
+.pt-row{display:flex;gap:4px;margin-bottom:3px;}
+.pt-field{flex:1;background:#fff;border:1px solid #e5e7eb;border-radius:4px;padding:4px 6px;}
+.pt-flabel{font-family:'Exo 2',sans-serif;font-size:6px;color:#9ca3af;text-transform:uppercase;}
+.pt-fvalue{font-family:'Exo 2',sans-serif;font-size:8px;font-weight:600;color:#1f2937;}
+.pt-total{background:#7c3aed;border-radius:5px;padding:5px 7px;display:flex;justify-content:space-between;align-items:center;margin-top:3px;}
+.pt-total-label{font-family:'Exo 2',sans-serif;font-size:8px;color:rgba(255,255,255,0.7);}
+.pt-total-value{font-family:'Exo 2',sans-serif;font-size:11px;font-weight:700;color:#fff;}
+.pt-wa{background:#25d366;border:none;border-radius:5px;padding:6px;width:100%;font-family:'Exo 2',sans-serif;font-size:8px;font-weight:700;color:#fff;text-align:center;margin-top:3px;}
+/* AquiProu screen */
+.screen-aqui{background:#1e1b4b;padding:8px;min-height:220px;}
+.aq-header{text-align:center;margin-bottom:6px;}
+.aq-title{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;color:#a5b4fc;}
+.aq-sub{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.4);margin-top:1px;}
+.aq-emoji-row{display:flex;justify-content:center;gap:6px;margin-bottom:6px;}
+.aq-emoji{font-size:14px;text-align:center;}
+.aq-level{display:flex;gap:3px;margin-bottom:5px;}
+.aq-lbtn{flex:1;border:1px solid rgba(165,180,252,0.3);border-radius:4px;padding:4px;text-align:center;}
+.aq-lbtn.sel{background:rgba(165,180,252,0.2);border-color:#a5b4fc;}
+.aq-ltxt{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.6);}
+.aq-anon{background:rgba(165,180,252,0.1);border:1px solid rgba(165,180,252,0.2);border-radius:5px;padding:5px;margin-bottom:4px;}
+.aq-anon-txt{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.4);text-align:center;}
+.aq-btn{background:#a5b4fc;border:none;border-radius:5px;padding:6px;width:100%;font-family:'Exo 2',sans-serif;font-size:8px;font-weight:700;color:#1e1b4b;text-align:center;}
+/* Galdar screen */
+.screen-galdar{background:#0f1f3d;padding:8px;min-height:220px;}
+.gd-header{background:rgba(200,150,12,0.15);border:1px solid rgba(200,150,12,0.3);border-radius:6px;padding:5px 7px;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.gd-flag{font-size:11px;}
+.gd-title{font-family:'Exo 2',sans-serif;font-size:8px;font-weight:700;color:#f0c040;}
+.gd-tabs{display:flex;gap:2px;margin-bottom:5px;}
+.gd-tab{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:3px;text-align:center;font-family:'Exo 2',sans-serif;font-size:6px;color:rgba(255,255,255,0.4);}
+.gd-tab.act{background:rgba(200,150,12,0.15);border-color:rgba(200,150,12,0.4);color:#f0c040;}
+.gd-complaint{display:flex;gap:5px;background:rgba(255,255,255,0.04);border-radius:4px;padding:5px 6px;margin-bottom:3px;border-left:2px solid #f0c040;}
+.gd-cdot{width:6px;height:6px;border-radius:50%;background:#f0c040;flex-shrink:0;margin-top:2px;}
+.gd-ctxt{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.65);}
+.gd-ai{background:rgba(200,150,12,0.1);border:1px solid rgba(200,150,12,0.2);border-radius:4px;padding:4px 6px;margin-top:3px;display:flex;gap:4px;align-items:center;}
+.gd-ai-icon{font-size:9px;}
+.gd-ai-txt{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.5);}
+
+/* Preview screens dentro de cards */
+.preview-barroso{background:#1a2a1a;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;}
+.preview-obra{background:#0d1b2a;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;}
+.preview-marcius{background:#1a1a2e;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;}
+.preview-pintur{background:#f3f0ff;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;}
+.preview-aqui{background:#1e1b4b;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;}
+.preview-galdar{background:#0f1f3d;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;}
+.preview-badge{font-family:'Exo 2',sans-serif;font-size:0.7rem;font-weight:600;padding:4px 10px;border-radius:12px;}
+
+/* SAT */
 .sat{padding:6rem 6%;background:var(--navy);position:relative;overflow:hidden;}
 .sat::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(200,150,12,0.08) 0%,transparent 65%);border-radius:50%;}
 .sat .section-title{color:var(--white);}
@@ -152,17 +275,18 @@ footer{background:var(--navy);border-top:1px solid rgba(200,150,12,0.2);padding:
 .footer-brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--white);}
 .footer-brand span{color:var(--gold);}
 footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
-@media(max-width:900px){.hero{grid-template-columns:1fr;padding:8rem 6% 4rem;}.hero-right{margin-top:3rem;}.badge-tl,.badge-br,.badge-tr{display:none;}}
-@media(max-width:640px){.hero-stats{gap:1.5rem;flex-wrap:wrap;}.nav-logo-main{font-size:1.1rem;}.value,.apps,.sat,.proceso,.cta-section{padding:4rem 5%;}}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:8rem 6% 4rem;}.hero-right{margin-top:3rem;}.badge-tl,.badge-br,.badge-tr{display:none;}.modal-inner{grid-template-columns:1fr;}.modal-right{border-radius:0 0 20px 20px;padding:1.5rem;}}
+@media(max-width:640px){.hero-stats{gap:1.5rem;flex-wrap:wrap;}.value,.apps,.sat,.proceso,.cta-section{padding:4rem 5%;}}
 </style>
 </head>
 <body>
+
 <nav>
-  <svg class="nav-skyline" viewBox="0 0 1200 80" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><g fill="white"><rect x="540" y="5" width="30" height="75"/><rect x="548" y="0" width="14" height="8"/><rect x="430" y="20" width="36" height="60"/><rect x="580" y="20" width="36" height="60"/><rect x="340" y="32" width="28" height="48"/><rect x="668" y="32" width="28" height="48"/><rect x="260" y="42" width="22" height="38"/><rect x="750" y="42" width="22" height="38"/><rect x="180" y="52" width="18" height="28"/><rect x="840" y="52" width="18" height="28"/><rect x="100" y="58" width="14" height="22"/><rect x="920" y="58" width="14" height="22"/></g></svg>
+  <svg class="nav-skyline" viewBox="0 0 1200 80" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg"><g fill="white"><rect x="540" y="5" width="30" height="75"/><rect x="548" y="0" width="14" height="8"/><rect x="430" y="20" width="36" height="60"/><rect x="580" y="20" width="36" height="60"/><rect x="340" y="32" width="28" height="48"/><rect x="668" y="32" width="28" height="48"/><rect x="260" y="42" width="22" height="38"/><rect x="750" y="42" width="22" height="38"/><rect x="180" y="52" width="18" height="28"/><rect x="840" y="52" width="18" height="28"/></g></svg>
   <div class="nav-glow"></div><div class="nav-scan"></div>
   <div class="nav-corner nc-tl"></div><div class="nav-corner nc-tr"></div><div class="nav-corner nc-bl"></div><div class="nav-corner nc-br"></div>
   <div class="nav-logo-wrap">
-    <svg class="nav-pin" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="nav-pin" viewBox="0 0 72 72" fill="none">
       <defs><radialGradient id="pg" cx="40%" cy="30%" r="65%"><stop offset="0%" stop-color="#FFD060"/><stop offset="60%" stop-color="#F5A623"/><stop offset="100%" stop-color="#C47A00"/></radialGradient></defs>
       <path d="M36 6C24.95 6 16 14.95 16 26C16 38.5 36 66 36 66C36 66 56 38.5 56 26C56 14.95 47.05 6 36 6Z" fill="url(#pg)"/>
       <circle cx="36" cy="26" r="10" fill="#0d1b2a"/><circle cx="36" cy="26" r="6.5" fill="none" stroke="rgba(255,165,0,0.6)" stroke-width="1.2"/>
@@ -177,8 +301,9 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
   <a href="#contacto" class="nav-cta">Contactar ahora</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-wm"><div class="wm-c wm1"></div><div class="wm-c wm2"></div><div class="wm-c wm3"></div><div class="hero-lines"></div></div>
+  <div class="hero-wm"><div class="wm-c wm1"></div><div class="wm-c wm2"></div><div class="hero-lines"></div></div>
   <div class="hero-left">
     <div class="hero-badge">Disponible en Lleida · Sevilla · Canarias</div>
     <h1>Tu empresa,<br><em>digitalizada.</em><br>Con soporte real.</h1>
@@ -202,9 +327,7 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
           <div class="p-wm1"></div><div class="p-wm2"></div><div class="p-lines"></div>
           <div class="p-statusbar"><span class="p-time">16:11</span><div class="p-icons"><div class="p-dot"></div><div class="p-dot"></div><div class="p-dot"></div><div class="p-batt"></div></div></div>
           <div class="p-logozone">
-            <div class="p-appicon">
-              <svg width="22" height="22" viewBox="0 0 72 72" fill="none"><path d="M36 6C24.95 6 16 14.95 16 26C16 38.5 36 66 36 66C36 66 56 38.5 56 26C56 14.95 47.05 6 36 6Z" fill="#388bfd"/><circle cx="36" cy="26" r="9" fill="#0a1628"/><circle cx="36" cy="26" r="4.5" fill="#388bfd" opacity="0.7"/><circle cx="36" cy="26" r="2" fill="#fff"/></svg>
-            </div>
+            <div class="p-appicon"><svg width="22" height="22" viewBox="0 0 72 72" fill="none"><path d="M36 6C24.95 6 16 14.95 16 26C16 38.5 36 66 36 66C36 66 56 38.5 56 26C56 14.95 47.05 6 36 6Z" fill="#388bfd"/><circle cx="36" cy="26" r="9" fill="#0a1628"/><circle cx="36" cy="26" r="4.5" fill="#388bfd" opacity="0.7"/><circle cx="36" cy="26" r="2" fill="#fff"/></svg></div>
             <div class="p-appname">ObraControl GPS</div>
             <div class="p-appsub">Field management · PWA</div>
           </div>
@@ -227,6 +350,7 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
   </div>
 </section>
 
+<!-- VALOR -->
 <section class="value" id="valor">
   <div class="section-tag">Por qué elegirnos</div>
   <h2 class="section-title">No somos una agencia.<br>Somos tu socio digital.</h2>
@@ -241,20 +365,95 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
   </div>
 </section>
 
+<!-- APPS -->
 <section class="apps" id="apps">
   <div class="section-tag">Nuestras soluciones</div>
   <h2 class="section-title">Apps que ya funcionan<br>en empresas reales</h2>
-  <p class="section-sub">Cada solución nació de un problema real de un cliente real. Todas adaptables a tu negocio.</p>
+  <p class="section-sub">Pulsa "Ver demo" para descubrir cada app en detalle con pantalla real.</p>
   <div class="apps-grid">
-    <div class="app-card"><div class="app-header"><div class="app-icon">🚛</div><div><div class="app-name">BarrosoApp</div><div class="app-sector">Áridos · Excavaciones</div></div></div><p class="app-desc">Albaranes digitales desde la tablet del conductor: cliente, material, cantidad, GPS, firma digital y PDF al instante.</p><span class="app-sat">SAT disponible</span></div>
-    <div class="app-card"><div class="app-header"><div class="app-icon">🏗️</div><div><div class="app-name">ObraControl GPS</div><div class="app-sector">Construcción · RRHH</div></div></div><p class="app-desc">Fichajes con GPS de operarios en obra. Panel con mapa en tiempo real, exportación de jornadas, 6 idiomas y modo offline.</p><span class="app-sat">SAT disponible</span></div>
-    <div class="app-card"><div class="app-header"><div class="app-icon">🛡️</div><div><div class="app-name">Marcius Seguridad</div><div class="app-sector">Seguridad privada</div></div></div><p class="app-desc">Rondas GPS para agentes: fichar, checkpoints, botón de pánico, informes de turno en PDF e integración con Google Sheets.</p><span class="app-sat">SAT disponible</span></div>
-    <div class="app-card"><div class="app-header"><div class="app-icon">🎨</div><div><div class="app-name">PinturApp</div><div class="app-sector">Pintura · Comercio</div></div></div><p class="app-desc">Presupuestos para pintores con voz, PDF con marca del proveedor, IVA automático y envío por WhatsApp.</p><span class="app-sat">SAT disponible</span></div>
-    <div class="app-card"><div class="app-header"><div class="app-icon">🏫</div><div><div class="app-name">AquíProu</div><div class="app-sector">Educación · Social</div></div></div><p class="app-desc">App antibullying para institutos: reporte anónimo, check-in emocional, contactos de emergencia y IA de gravedad. Trilingüe.</p><span class="app-sat">SAT disponible</span></div>
-    <div class="app-card"><div class="app-header"><div class="app-icon">🗳️</div><div><div class="app-name">Panel Gáldar</div><div class="app-sector">Política · Institucional</div></div></div><p class="app-desc">Suite para concejales: quejas vecinales, mapa de incidencias, asesor IA, seguimiento de plenos y bot de Telegram.</p><span class="app-sat">SAT disponible</span></div>
+
+    <!-- BarrosoApp -->
+    <div class="app-card" onclick="openModal('barroso')">
+      <div class="app-screen-preview preview-barroso">
+        <span style="font-size:2.5rem;">🚛</span>
+        <div><div class="preview-badge" style="background:rgba(245,166,35,0.2);color:#f5a623;border:1px solid rgba(245,166,35,0.4);">Áridos · GPS · PDF</div></div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-header"><div class="app-icon">🚛</div><div><div class="app-name">BarrosoApp</div><div class="app-sector">Áridos · Excavaciones</div></div></div>
+        <p class="app-desc">Albaranes digitales desde la tablet del conductor con GPS, firma y PDF al instante.</p>
+        <div class="app-footer"><span class="app-sat">SAT disponible</span><button class="btn-demo" onclick="event.stopPropagation();openModal('barroso')">Ver demo</button></div>
+      </div>
+    </div>
+
+    <!-- ObraControl -->
+    <div class="app-card" onclick="openModal('obra')">
+      <div class="app-screen-preview preview-obra">
+        <span style="font-size:2.5rem;">🏗️</span>
+        <div><div class="preview-badge" style="background:rgba(56,139,253,0.2);color:#388bfd;border:1px solid rgba(56,139,253,0.4);">GPS · 6 idiomas · Offline</div></div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-header"><div class="app-icon">🏗️</div><div><div class="app-name">ObraControl GPS</div><div class="app-sector">Construcción · RRHH</div></div></div>
+        <p class="app-desc">Fichajes GPS de operarios en obra con panel en tiempo real y modo offline.</p>
+        <div class="app-footer"><span class="app-sat">SAT disponible</span><button class="btn-demo" onclick="event.stopPropagation();openModal('obra')">Ver demo</button></div>
+      </div>
+    </div>
+
+    <!-- Marcius -->
+    <div class="app-card" onclick="openModal('marcius')">
+      <div class="app-screen-preview preview-marcius">
+        <span style="font-size:2.5rem;">🛡️</span>
+        <div><div class="preview-badge" style="background:rgba(200,150,12,0.2);color:#c8960c;border:1px solid rgba(200,150,12,0.4);">Rondas · Pánico · PDF</div></div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-header"><div class="app-icon">🛡️</div><div><div class="app-name">Marcius Seguridad</div><div class="app-sector">Seguridad privada</div></div></div>
+        <p class="app-desc">Rondas GPS para agentes de seguridad con checkpoints, botón de pánico e informes PDF.</p>
+        <div class="app-footer"><span class="app-sat">SAT disponible</span><button class="btn-demo" onclick="event.stopPropagation();openModal('marcius')">Ver demo</button></div>
+      </div>
+    </div>
+
+    <!-- PinturApp -->
+    <div class="app-card" onclick="openModal('pintur')">
+      <div class="app-screen-preview preview-pintur">
+        <span style="font-size:2.5rem;">🎨</span>
+        <div><div class="preview-badge" style="background:rgba(124,58,237,0.15);color:#7c3aed;border:1px solid rgba(124,58,237,0.3);">Voz · IVA · WhatsApp</div></div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-header"><div class="app-icon" style="background:#7c3aed;">🎨</div><div><div class="app-name">PinturApp</div><div class="app-sector">Pintura · Comercio</div></div></div>
+        <p class="app-desc">Presupuestos para pintores por voz, PDF con marca del proveedor y envío WhatsApp.</p>
+        <div class="app-footer"><span class="app-sat">SAT disponible</span><button class="btn-demo" onclick="event.stopPropagation();openModal('pintur')">Ver demo</button></div>
+      </div>
+    </div>
+
+    <!-- AquíProu -->
+    <div class="app-card" onclick="openModal('aqui')">
+      <div class="app-screen-preview preview-aqui">
+        <span style="font-size:2.5rem;">🏫</span>
+        <div><div class="preview-badge" style="background:rgba(165,180,252,0.15);color:#a5b4fc;border:1px solid rgba(165,180,252,0.3);">Anónimo · IA · Trilingüe</div></div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-header"><div class="app-icon" style="background:#1e1b4b;">🏫</div><div><div class="app-name">AquíProu</div><div class="app-sector">Educación · Social</div></div></div>
+        <p class="app-desc">App antibullying con reporte anónimo, check-in emocional y IA de gravedad. Trilingüe.</p>
+        <div class="app-footer"><span class="app-sat">SAT disponible</span><button class="btn-demo" onclick="event.stopPropagation();openModal('aqui')">Ver demo</button></div>
+      </div>
+    </div>
+
+    <!-- Gáldar -->
+    <div class="app-card" onclick="openModal('galdar')">
+      <div class="app-screen-preview preview-galdar">
+        <span style="font-size:2.5rem;">🗳️</span>
+        <div><div class="preview-badge" style="background:rgba(200,150,12,0.15);color:#f0c040;border:1px solid rgba(200,150,12,0.3);">IA · Mapa · Telegram</div></div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-header"><div class="app-icon">🗳️</div><div><div class="app-name">Panel Gáldar</div><div class="app-sector">Política · Institucional</div></div></div>
+        <p class="app-desc">Suite para concejales con quejas vecinales, mapa de incidencias, asesor IA y bot Telegram.</p>
+        <div class="app-footer"><span class="app-sat">SAT disponible</span><button class="btn-demo" onclick="event.stopPropagation();openModal('galdar')">Ver demo</button></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
+<!-- SAT -->
 <section class="sat" id="sat">
   <div class="section-tag" style="color:var(--gold-light)">Servicio técnico</div>
   <h2 class="section-title">SAT — Lo que nos diferencia</h2>
@@ -267,22 +466,24 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
   </div>
 </section>
 
+<!-- PROCESO -->
 <section class="proceso" id="proceso">
   <div class="section-tag">Cómo trabajamos</div>
   <h2 class="section-title">De la idea a la app<br>en 5 pasos</h2>
   <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Primera reunión</h3><p>Entendemos tu negocio y tu problema concreto. Presencial en Lleida o videollamada. Sin coste ni compromiso.</p></div></div>
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Primera reunión</h3><p>Presencial en Lleida o videollamada. Sin coste ni compromiso.</p></div></div>
     <div class="step"><div class="step-num">2</div><div class="step-content"><h3>Demo o prototipo</h3><p>En muchos casos puedes ver una app similar ya funcionando antes de decidir nada.</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Presupuesto cerrado</h3><p>Precio fijo para el desarrollo inicial. Sin sorpresas. Con condiciones de SAT claras desde el principio.</p></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Desarrollo y entrega</h3><p>Entregas parciales para que veas el avance. Formación al equipo incluida en la entrega final.</p></div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-content"><h3>SAT continuo</h3><p>Soporte mensual activo. Siempre disponible por WhatsApp o teléfono para lo que necesites.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Presupuesto cerrado</h3><p>Precio fijo para el desarrollo inicial. Sin sorpresas.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Desarrollo y entrega</h3><p>Entregas parciales para que veas el avance. Formación incluida.</p></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><h3>SAT continuo</h3><p>Siempre disponible por WhatsApp o teléfono para lo que necesites.</p></div></div>
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta-section" id="contacto">
   <div class="cta-box">
     <h2>¿Hablamos<br><span>sin compromiso?</span></h2>
-    <p>Primera reunión gratuita, presencial en Lleida o por videollamada. Cuéntame tu negocio y te digo si tengo una solución para ti.</p>
+    <p>Primera reunión gratuita, presencial en Lleida o por videollamada.</p>
     <a href="https://wa.me/34000000000?text=Hola%20Juan%20Manuel%2C%20me%20interesa%20conocer%20vuestras%20apps" class="btn-primary" target="_blank">Escribir por WhatsApp →</a>
   </div>
 </section>
@@ -292,5 +493,143 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
   <p>Lleida, Cataluña · Español · Català · English</p>
   <p>© 2026 JM Prestige AI Solutions</p>
 </footer>
+
+<!-- MODALES -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-inner" id="modal-inner"></div>
+  </div>
+</div>
+
+<script>
+const apps = {
+  barroso: {
+    icon:'🚛', tag:'Áridos · Excavaciones', title:'BarrosoApp',
+    desc:'Solución completa para empresas de áridos y excavaciones. El conductor selecciona cliente, tipo de material y cantidad desde su tablet. El GPS registra la posición de cada entrega automáticamente.',
+    features:['Albarán digital con firma del cliente en pantalla','GPS automático en cada entrega','Generación de PDF al instante','Panel de oficina en tiempo real con Firebase','Historial completo de entregas y clientes','Exportación de datos a Excel'],
+    sat:'SAT disponible · Soporte prioritario',
+    screen: `<div class="screen-barroso">
+      <div class="bs-header"><span class="bs-logo">🚛</span><span class="bs-title">BarrosoApp · Nuevo albarán</span></div>
+      <div class="bs-field"><div class="bs-label">Cliente</div><div class="bs-value">Excavaciones Martínez SL</div></div>
+      <div class="bs-field"><div class="bs-label">Material</div><div class="bs-value">Arena 0-5mm</div></div>
+      <div class="bs-field"><div class="bs-label">Cantidad</div><div class="bs-value">12.5 Tn</div></div>
+      <div class="bs-gps"><div class="bs-gps-dot"></div><div class="bs-gps-txt">GPS: 41.6178°N, 0.6202°E · Almacelles</div></div>
+      <div class="bs-btn">✎ Firma digital del cliente</div>
+    </div>`
+  },
+  obra: {
+    icon:'🏗️', tag:'Construcción · RRHH', title:'ObraControl GPS',
+    desc:'Control de presencia con GPS para empresas de construcción. Los operarios fichan desde el móvil y el encargado ve en tiempo real quién está trabajando, dónde y cuántas horas lleva.',
+    features:['Fichaje GPS con geolocalización precisa','Panel de mando en tiempo real con mapa','6 idiomas: ES, CA, EN, FR, RO, AR','Modo offline con sincronización automática','Exportación de jornadas a Excel/PDF','Sistema de PIN por operario · RGPD compliant'],
+    sat:'SAT disponible · Soporte prioritario',
+    screen: `<div class="screen-obra">
+      <div class="oc-bar"><span class="oc-name">Panel · Obras Lance 2024</span><div class="oc-live"></div></div>
+      <div class="oc-map"><div class="oc-map-grid"></div><span class="oc-pin">📍</span></div>
+      <div class="oc-worker"><div class="oc-avatar">JL</div><span class="oc-wname">José López · Obra C/ Mayor</span><span class="oc-status">● Activo</span></div>
+      <div class="oc-worker"><div class="oc-avatar">MR</div><span class="oc-wname">Mihai Radu · Obra Km 4</span><span class="oc-status">● Activo</span></div>
+      <div class="oc-worker"><div class="oc-avatar">AB</div><span class="oc-wname">Ahmed Ben · Obra C/ Mayor</span><span class="oc-status" style="color:rgba(255,255,255,0.3)">○ Descanso</span></div>
+    </div>`
+  },
+  marcius: {
+    icon:'🛡️', tag:'Seguridad privada', title:'Marcius Seguridad',
+    desc:'App de gestión de rondas para agentes de seguridad. Registro de checkpoints por GPS, botón de pánico con alerta inmediata al coordinador y generación automática de informes de turno.',
+    features:['Botón de pánico con alerta inmediata','Checkpoints GPS verificados en tiempo real','Informe de turno en PDF automático','Integración con Google Sheets','Control de inicio y fin de turno','Historial completo de incidencias'],
+    sat:'SAT disponible · Soporte prioritario',
+    screen: `<div class="screen-marcius">
+      <div class="mc-header"><div class="mc-shield">🛡️</div><span class="mc-title">Marcius Seguridad · Turno activo</span></div>
+      <div class="mc-panic">🚨 BOTÓN DE PÁNICO</div>
+      <div class="mc-checkpoint"><span class="mc-check-icon">✅</span><span class="mc-check-name">Entrada principal</span><span class="mc-check-time">08:12</span></div>
+      <div class="mc-checkpoint"><span class="mc-check-icon">✅</span><span class="mc-check-name">Planta baja · Zona A</span><span class="mc-check-time">08:34</span></div>
+      <div class="mc-checkpoint"><span class="mc-check-icon">⏳</span><span class="mc-check-name">Planta 1 · Zona B</span><span class="mc-check-time">—</span></div>
+    </div>`
+  },
+  pintur: {
+    icon:'🎨', tag:'Pintura · Comercio', title:'PinturApp',
+    desc:'Herramienta de presupuestos para pintores profesionales. Dicta por voz los trabajos, calcula materiales e IVA automáticamente, y envía el presupuesto en PDF por WhatsApp al cliente en segundos.',
+    features:['Dictado por voz en todos los campos','Cálculo automático de materiales e IVA','PDF con marca de la tienda distribuidora','Envío directo por WhatsApp al cliente','Plantilla white-label para tiendas','Historial de presupuestos por cliente'],
+    sat:'SAT disponible · Soporte prioritario',
+    screen: `<div class="screen-pintur">
+      <div class="pt-header"><span class="pt-logo">🎨</span><span class="pt-title">PinturApp · Nuevo presupuesto</span></div>
+      <div class="pt-row">
+        <div class="pt-field"><div class="pt-flabel">Cliente</div><div class="pt-fvalue">Carlos Martí</div></div>
+        <div class="pt-field"><div class="pt-flabel">Fecha</div><div class="pt-fvalue">03/05/26</div></div>
+      </div>
+      <div class="pt-field"><div class="pt-flabel">Trabajo</div><div class="pt-fvalue">Salon + 2 habitaciones · 85m²</div></div>
+      <div class="pt-row">
+        <div class="pt-field"><div class="pt-flabel">Mano obra</div><div class="pt-fvalue">1.200€</div></div>
+        <div class="pt-field"><div class="pt-flabel">Material</div><div class="pt-fvalue">340€</div></div>
+      </div>
+      <div class="pt-total"><span class="pt-total-label">Total con IVA</span><span class="pt-total-value">1.862,80€</span></div>
+      <div class="pt-wa">📤 Enviar por WhatsApp</div>
+    </div>`
+  },
+  aqui: {
+    icon:'🏫', tag:'Educación · Social', title:'AquíProu',
+    desc:'App de prevención del acoso escolar para institutos. Los alumnos pueden reportar situaciones de forma completamente anónima, hacer check-in emocional y acceder a recursos de ayuda en 3 idiomas.',
+    features:['Reporte 100% anónimo garantizado','Check-in emocional con iconos intuitivos','IA simula nivel de gravedad del incidente','Contactos de emergencia directos (112/024)','Trilingüe: Català / Castellano / English','QR de instalación para distribuir en el aula'],
+    sat:'SAT disponible · Soporte prioritario',
+    screen: `<div class="screen-aqui">
+      <div class="aq-header"><div class="aq-title">AquíProu · Com et sents?</div><div class="aq-sub">Tot és anònim · Todo es anónimo</div></div>
+      <div class="aq-emoji-row"><span class="aq-emoji">😊</span><span class="aq-emoji">😐</span><span class="aq-emoji">😟</span><span class="aq-emoji">😰</span></div>
+      <div class="aq-level">
+        <div class="aq-lbtn"><div class="aq-ltxt">Lleu</div></div>
+        <div class="aq-lbtn sel"><div class="aq-ltxt">Moderat</div></div>
+        <div class="aq-lbtn"><div class="aq-ltxt">Greu</div></div>
+      </div>
+      <div class="aq-anon"><div class="aq-anon-txt">🔒 El teu nom no es guardarà mai</div></div>
+      <div class="aq-btn">Enviar informe · Enviar informe</div>
+    </div>`
+  },
+  galdar: {
+    icon:'🗳️', tag:'Política · Institucional', title:'Panel Gáldar',
+    desc:'Suite digital completa para el concejal de UxGC en Gáldar (Gran Canaria). Gestión de quejas vecinales con mapa de calor, asesor IA político, seguimiento de plenos y app paralela para vecinos.',
+    features:['Mapa interactivo de quejas por barrio','Asesor IA para análisis político y rivales','Bot de Telegram para vecinos (@galdar_quejas)','Seguimiento de plenos y actas municipales','Panel de rivales con datos de dedicación','App de vecinos integrada con Firebase'],
+    sat:'SAT disponible · Soporte prioritario',
+    screen: `<div class="screen-galdar">
+      <div class="gd-header"><span class="gd-flag">🏝️</span><span class="gd-title">Panel Gáldar · Concejal UxGC</span></div>
+      <div class="gd-tabs">
+        <div class="gd-tab act">Quejas</div>
+        <div class="gd-tab">Mapa</div>
+        <div class="gd-tab">IA</div>
+        <div class="gd-tab">Plenos</div>
+      </div>
+      <div class="gd-complaint"><div class="gd-cdot"></div><div class="gd-ctxt">Farola apagada · C/ Constitución nº12</div></div>
+      <div class="gd-complaint"><div class="gd-cdot" style="background:#ef4444;"></div><div class="gd-ctxt">Bache peligroso · Av. Canarias · Urgente</div></div>
+      <div class="gd-ai"><span class="gd-ai-icon">🤖</span><span class="gd-ai-txt">Asesor IA disponible · 3 análisis nuevos</span></div>
+    </div>`
+  }
+};
+
+function openModal(id) {
+  const app = apps[id];
+  document.getElementById('modal-inner').innerHTML = `
+    <div class="modal-left">
+      <div class="modal-icon">${app.icon}</div>
+      <div class="modal-tag">${app.tag}</div>
+      <div class="modal-title">${app.title}</div>
+      <p class="modal-desc">${app.desc}</p>
+      <div class="modal-features">${app.features.map(f=>`<div class="modal-feat"><span class="feat-check">✓</span><span>${f}</span></div>`).join('')}</div>
+      <span class="modal-sat">${app.sat}</span>
+    </div>
+    <div class="modal-right">
+      <div class="modal-screen-title">Pantalla real de la app</div>
+      <div class="mini-phone">
+        <div class="mini-notch"><div class="mini-cam"></div></div>
+        <div class="mini-screen">${app.screen}</div>
+        <div class="mini-bottom"><div class="mini-btri"></div><div class="mini-bdot"></div><div class="mini-bsq"></div></div>
+      </div>
+    </div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e) {
+  if(!e || e.target===document.getElementById('modal-overlay') || e.target.classList.contains('modal-close')) {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal({target:document.getElementById('modal-overlay')});});
+</script>
 </body>
 </html>
