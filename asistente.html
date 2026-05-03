@@ -23,8 +23,6 @@
       display: flex;
       flex-direction: column;
     }
-
-    /* HEADER */
     header {
       background: linear-gradient(135deg, var(--dark2), var(--dark3));
       border-bottom: 1px solid var(--border);
@@ -51,8 +49,6 @@
       color: var(--gold);
       font-weight: 600;
     }
-
-    /* LANG SWITCHER */
     .lang-bar {
       background: var(--dark2);
       border-bottom: 1px solid var(--border);
@@ -78,8 +74,6 @@
       border-color: var(--gold);
     }
     .lang-separator { color: var(--text2); font-size: 12px; margin: 0 4px; }
-
-    /* CHAT */
     #chat-msgs {
       flex: 1;
       overflow-y: auto;
@@ -91,10 +85,8 @@
       width: 100%;
       margin: 0 auto;
     }
-
     .msg { display: flex; gap: 10px; align-items: flex-start; }
     .msg.user { flex-direction: row-reverse; }
-
     .msg-avatar {
       width: 34px; height: 34px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -102,7 +94,6 @@
     }
     .msg.ia .msg-avatar { background: linear-gradient(135deg, var(--gold), #8B6914); }
     .msg.user .msg-avatar { background: var(--dark3); border: 1px solid var(--border); }
-
     .msg-bubble {
       max-width: 82%;
       padding: 11px 15px;
@@ -122,8 +113,6 @@
       font-weight: 500;
       border-bottom-right-radius: 4px;
     }
-
-    /* CHIPS RÁPIDOS */
     .chips-wrap {
       padding: 0 20px 12px;
       max-width: 700px;
@@ -136,11 +125,7 @@
       margin-bottom: 8px;
       letter-spacing: 0.05em;
     }
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
     .chip {
       padding: 6px 14px;
       background: transparent;
@@ -151,11 +136,7 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .chip:hover, .chip:active {
-      background: rgba(201,162,39,0.15);
-    }
-
-    /* INPUT */
+    .chip:hover, .chip:active { background: rgba(201,162,39,0.15); }
     .input-wrap {
       padding: 14px 20px;
       background: var(--dark2);
@@ -196,8 +177,6 @@
     }
     .btn-send:active { transform: scale(0.95); }
     .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* COSTE */
     .coste-bar {
       padding: 6px 20px;
       background: var(--dark);
@@ -209,8 +188,6 @@
       color: var(--text2);
     }
     .coste-bar span { color: var(--gold); font-weight: 600; }
-
-    /* TYPING */
     .typing-dot {
       display: inline-block;
       width: 6px; height: 6px;
@@ -225,8 +202,6 @@
       0%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-6px); }
     }
-
-    /* SCROLLBAR */
     #chat-msgs::-webkit-scrollbar { width: 4px; }
     #chat-msgs::-webkit-scrollbar-track { background: transparent; }
     #chat-msgs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -300,16 +275,19 @@ PROYECTOS REALIZADOS (ejemplos reales):
 - ObraControl GPS Lance: control de presencia y obras para Construcciones Lance 2024 SL (Marchena, Sevilla). GPS, fichaje, 6 idiomas, 54 trabajadores.
 - BarrosoApp: albaranes digitales para Excavaciones Barroso (Almacelles, Lleida). Conductores con tablet, firma digital, PDF automático.
 - Marcius Seguridad: app de guardias de seguridad con GPS, checkpoints, informe de turno PDF.
-- AquíProu: app anti-acoso escolar para Institut Terraferma (Lleida). Trilingual, IA, anónima.
+- AquíProu: app anti-acoso escolar para instituto de Lleida. Trilingüe, IA, anónima.
 - Panel Político Gáldar: sistema digital completo para concejal de Gran Canaria. Quejas vecinales, IA política, Telegram, inteligencia electoral.
 - PinturApp: app de presupuestos para pintores con patrocinio de tienda de pinturas.
 
-PRECIOS ORIENTATIVOS:
-- App básica (formulario + base de datos): desde 500€
-- App con IA integrada: desde 800€
-- Sistema completo con panel de gestión: desde 1.200€
-- Mantenimiento mensual: desde 50€/mes
+MODELO DE PRECIOS:
+- Apps estandarizadas: GRATIS (sin coste de desarrollo, sin compromiso)
+- Solo pagas el mantenimiento mensual:
+  · Plan Básico: 20€/mes — actualizaciones y hasta 2 cambios pequeños al mes
+  · Plan Estándar: 50€/mes — soporte WhatsApp, hasta 4 cambios, respuesta en 24h
+  · Plan Premium: 150€/mes — desarrollo incluido, soporte prioritario y formación del equipo
+- Apps a medida o con funcionalidades especiales: presupuesto personalizado
 - Agente WhatsApp IA: desde 150€/mes
+- Sin permanencia, cancela cuando quieras, sin costes ocultos
 
 TECNOLOGÍA:
 - Frontend: HTML, CSS, JavaScript (PWA)
@@ -320,7 +298,7 @@ TECNOLOGÍA:
 
 CONTACTO:
 - WhatsApp/Teléfono: disponible bajo petición
-- Email: info@jmprestige.es (o similar)
+- Email: info@obracontrolgps.net
 - Web: obracontrol-tech.github.io/jmprestige
 - Ubicación: Lleida, Cataluña — trabaja con clientes de toda España
 
@@ -356,16 +334,19 @@ PROJECTES REALITZATS (exemples reals):
 - ObraControl GPS Lance: control de presència i obres per a Construcciones Lance 2024 SL. GPS, fitxatge, 6 idiomes, 54 treballadors.
 - BarrosoApp: albarans digitals per a Excavaciones Barroso (Almacelles, Lleida). Conductors amb tauleta, signatura digital, PDF automàtic.
 - Marcius Seguretat: app de guàrdies de seguretat amb GPS, checkpoints, informe de torn PDF.
-- AquíProu: app anti-assetjament escolar per a l'Institut Terraferma (Lleida). Trilingüe, IA, anònima.
+- AquíProu: app anti-assetjament escolar per a un institut de Lleida. Trilingüe, IA, anònima.
 - Panel Polític Gáldar: sistema digital complet per a regidor de Gran Canaria.
 - PinturApp: app de pressupostos per a pintors amb patrocini de botiga de pintures.
 
-PREUS ORIENTATIUS:
-- App bàsica (formulari + base de dades): des de 500€
-- App amb IA integrada: des de 800€
-- Sistema complet amb panell de gestió: des de 1.200€
-- Manteniment mensual: des de 50€/mes
+MODEL DE PREUS:
+- Apps estandarditzades: GRATUÏTES (sense cost de desenvolupament, sense compromís)
+- Només pagues el manteniment mensual:
+  · Pla Bàsic: 20€/mes — actualitzacions i fins a 2 canvis petits al mes
+  · Pla Estàndard: 50€/mes — suport WhatsApp, fins a 4 canvis, resposta en 24h
+  · Pla Premium: 150€/mes — desenvolupament inclòs, suport prioritari i formació de l'equip
+- Apps a mida o amb funcionalitats especials: pressupost personalitzat
 - Agent WhatsApp IA: des de 150€/mes
+- Sense permanència, cancel·la quan vulguis, sense costos ocults
 
 TECNOLOGIA:
 - Frontend: HTML, CSS, JavaScript (PWA)
@@ -374,6 +355,7 @@ TECNOLOGIA:
 - Desplegament: GitHub Pages (gratuït, ràpid, segur)
 
 CONTACTE:
+- Email: info@obracontrolgps.net
 - Web: obracontrol-tech.github.io/jmprestige
 - Ubicació: Lleida, Catalunya — treballa amb clients de tota Espanya
 
@@ -488,13 +470,11 @@ function preguntaRapida(texto) {
   enviar();
 }
 
-// Auto-resize textarea
 document.getElementById('user-input').addEventListener('input', function() {
   this.style.height = 'auto';
   this.style.height = Math.min(this.scrollHeight, 120) + 'px';
 });
 
-// Iniciar
 renderChips();
 setTimeout(() => addMsg('ia', TEXTOS[lang].bienvenida), 500);
 </script>
