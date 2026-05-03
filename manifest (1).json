@@ -1,0 +1,25 @@
+{
+  "name": "JM Prestige AI Solutions",
+  "short_name": "JM Prestige",
+  "description": "Apps a medida con soporte real · Lleida",
+  "start_url": "/jmprestige/index.html",
+  "scope": "/jmprestige/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#C9A227",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
