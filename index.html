@@ -560,7 +560,292 @@ window.addEventListener('DOMContentLoaded',()=>{
   </div>
 </section>
 
-<!-- SAT -->
+<!-- ===== SECCIÓN CÁMARA IA ===== -->
+<section class="camara-ia-section" id="camara-ia">
+<div class="camara-ia-inner">
+
+  <div class="camara-ia-header">
+    <div class="camara-ia-badge">✨ Nuevo · IA Visual</div>
+    <h2 class="camara-ia-titulo">¿No sabes qué app necesitas?<br><em>Muéstranos una foto</em></h2>
+    <p class="camara-ia-sub">Apunta con la cámara a tu negocio, obra o vehículo y nuestra IA te recomienda la app perfecta en segundos.</p>
+  </div>
+
+  <div class="camara-ia-card">
+
+    <div class="camara-zona-wrap">
+      <div class="camara-zona" id="camara-zona-web" onclick="document.getElementById('input-foto-web').click()">
+        <img id="preview-web" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:12px;">
+        <div class="camara-placeholder" id="camara-placeholder-web">
+          <div class="camara-ph-icon">📸</div>
+          <div class="camara-ph-texto">Toca para hacer una foto</div>
+          <div class="camara-ph-sub">o sube una imagen de tu galería</div>
+        </div>
+      </div>
+    </div>
+
+    <input type="file" id="input-foto-web" accept="image/*" capture="environment" style="display:none" onchange="cargarFotoWeb(this)">
+    <input type="file" id="input-galeria-web" accept="image/*" style="display:none" onchange="cargarFotoWeb(this)">
+
+    <div class="camara-ia-btns">
+      <button class="btn-camara-web" onclick="document.getElementById('input-foto-web').click()">📷 Cámara</button>
+      <button class="btn-camara-web" onclick="document.getElementById('input-galeria-web').click()">🖼️ Galería</button>
+    </div>
+
+    <button class="btn-analizar-web" id="btn-analizar-web" onclick="analizarFotoWeb()" style="display:none">
+      🤖 Analizar con IA — ¿Qué app necesito?
+    </button>
+
+    <div class="camara-resultado-web" id="camara-resultado-web" style="display:none"></div>
+
+  </div>
+
+  <div class="camara-ia-ejemplos">
+    <span class="cia-ej-label">Ejemplos que puedes fotografiar:</span>
+    <span class="cia-ej">🏗️ Una obra</span>
+    <span class="cia-ej">🚛 Un camión</span>
+    <span class="cia-ej">🎨 Una pared</span>
+    <span class="cia-ej">🏢 Tu negocio</span>
+    <span class="cia-ej">👷 Operarios</span>
+    <span class="cia-ej">🛡️ Un control de seguridad</span>
+  </div>
+
+</div>
+</section>
+
+<style>
+.camara-ia-section{
+  padding:5rem 1.5rem;
+  background:linear-gradient(160deg,#0f0f0a 0%,#1a1a10 100%);
+  position:relative;overflow:hidden;
+}
+.camara-ia-section::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(200,168,75,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.camara-ia-inner{max-width:700px;margin:0 auto;text-align:center;}
+.camara-ia-badge{
+  display:inline-block;
+  background:rgba(200,168,75,0.12);
+  border:1px solid rgba(200,168,75,0.3);
+  color:#C9A227;
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:0.15em;text-transform:uppercase;
+  padding:0.3rem 1rem;border-radius:20px;
+  margin-bottom:1.2rem;
+}
+.camara-ia-titulo{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,4vw,2.4rem);
+  color:#fff;line-height:1.2;margin-bottom:1rem;
+}
+.camara-ia-titulo em{color:#C9A227;font-style:italic;}
+.camara-ia-sub{
+  font-size:1rem;color:#888;line-height:1.7;
+  max-width:500px;margin:0 auto 2rem;
+}
+.camara-ia-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(200,168,75,0.15);
+  border-radius:20px;padding:1.8rem;
+  margin-bottom:1.5rem;
+}
+.camara-zona-wrap{margin-bottom:1.2rem;}
+.camara-zona{
+  width:100%;height:200px;
+  border:2px dashed rgba(200,168,75,0.25);
+  border-radius:14px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color 0.2s;
+  overflow:hidden;
+}
+.camara-zona:hover{border-color:rgba(200,168,75,0.5);}
+.camara-placeholder{display:flex;flex-direction:column;align-items:center;gap:0.4rem;}
+.camara-ph-icon{font-size:2.5rem;}
+.camara-ph-texto{font-size:1rem;font-weight:600;color:#ccc;}
+.camara-ph-sub{font-size:0.8rem;color:#555;}
+.camara-ia-btns{display:flex;gap:0.8rem;justify-content:center;margin-bottom:1rem;}
+.btn-camara-web{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(200,168,75,0.2);
+  color:#ccc;border-radius:25px;
+  padding:0.6rem 1.4rem;font-size:0.9rem;
+  cursor:pointer;transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.btn-camara-web:hover{border-color:rgba(200,168,75,0.5);color:#fff;}
+.btn-analizar-web{
+  width:100%;
+  background:linear-gradient(135deg,#9a7a2e,#C9A227,#e2c06a);
+  color:#0a0a0a;border:none;border-radius:12px;
+  padding:1rem 1.5rem;font-size:1rem;font-weight:700;
+  cursor:pointer;letter-spacing:0.05em;
+  font-family:'DM Sans',sans-serif;
+  position:relative;overflow:hidden;
+  transition:opacity 0.2s;
+}
+.btn-analizar-web:hover{opacity:0.9;}
+.btn-analizar-web:disabled{opacity:0.4;cursor:not-allowed;}
+.camara-resultado-web{
+  margin-top:1.2rem;
+  background:rgba(0,0,0,0.3);
+  border:1px solid rgba(200,168,75,0.15);
+  border-radius:14px;padding:1.2rem;
+  text-align:left;
+}
+.cr-cargando{
+  display:flex;align-items:center;gap:10px;
+  color:#888;font-size:0.9rem;
+  justify-content:center;padding:1rem 0;
+}
+.cr-dots span{animation:dotAnim 1.4s infinite;display:inline-block;}
+.cr-dots span:nth-child(2){animation-delay:0.2s;}
+.cr-dots span:nth-child(3){animation-delay:0.4s;}
+@keyframes dotAnim{0%,80%,100%{opacity:0;}40%{opacity:1;}}
+.cr-desc{font-size:0.88rem;color:#aaa;line-height:1.7;margin-bottom:1rem;border-left:2px solid rgba(200,168,75,0.3);padding-left:0.8rem;}
+.cr-apps{display:flex;flex-direction:column;gap:0.6rem;}
+.cr-app{
+  display:flex;align-items:center;gap:0.8rem;
+  padding:0.8rem 1rem;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(200,168,75,0.1);
+  border-radius:10px;
+}
+.cr-app-icon{font-size:1.4rem;flex-shrink:0;}
+.cr-app-info{flex:1;}
+.cr-app-nom{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.2rem;}
+.cr-app-razon{font-size:0.78rem;color:#888;line-height:1.4;}
+.cr-app-match{
+  font-size:0.72rem;font-weight:600;
+  border-radius:10px;padding:0.2rem 0.7rem;
+  white-space:nowrap;flex-shrink:0;
+}
+.cr-app-match.alto{background:rgba(39,174,96,0.15);color:#27ae60;}
+.cr-app-match.medio{background:rgba(200,168,75,0.15);color:#C9A227;}
+.cr-app-match.posible{background:rgba(41,128,185,0.15);color:#2980b9;}
+.cr-nueva{
+  width:100%;margin-top:0.8rem;
+  background:none;border:1px solid rgba(255,255,255,0.08);
+  color:#666;border-radius:8px;padding:0.6rem;
+  font-size:0.82rem;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+}
+.cr-nueva:hover{color:#aaa;}
+.camara-ia-ejemplos{
+  display:flex;flex-wrap:wrap;gap:0.5rem;
+  align-items:center;justify-content:center;
+}
+.cia-ej-label{font-size:0.75rem;color:#555;width:100%;}
+.cia-ej{
+  font-size:0.8rem;color:#888;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:20px;padding:0.3rem 0.8rem;
+}
+</style>
+
+<script>
+const WORKER_IA = 'https://orange-boat-6d42.pedrosaborrego.workers.dev';
+let imgBase64Web = '', imgTipoWeb = '';
+
+function cargarFotoWeb(input){
+  const file = input.files[0];
+  if(!file) return;
+  imgTipoWeb = file.type || 'image/jpeg';
+  const reader = new FileReader();
+  reader.onload = function(e){
+    imgBase64Web = e.target.result.split(',')[1];
+    const prev = document.getElementById('preview-web');
+    prev.src = e.target.result;
+    prev.style.display = 'block';
+    document.getElementById('camara-placeholder-web').style.display = 'none';
+    document.getElementById('btn-analizar-web').style.display = 'block';
+    document.getElementById('camara-resultado-web').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function analizarFotoWeb(){
+  const btn = document.getElementById('btn-analizar-web');
+  const res = document.getElementById('camara-resultado-web');
+  btn.disabled = true;
+  res.style.display = 'block';
+  res.innerHTML = '<div class="cr-cargando">🤖 Analizando tu imagen<span class="cr-dots"><span>.</span><span>.</span><span>.</span></span></div>';
+
+  const prompt = `Eres el asistente de JM Prestige AI Solutions. Analiza esta imagen y recomienda qué app encaja mejor.
+
+Apps disponibles:
+- 🏗️ ObraControl GPS: construcción, obra, operarios, fichajes
+- 🛡️ Marcius Seguridad: vigilancia, seguridad privada, rondas
+- 🚛 BarrosoApp: áridos, camiones, transporte, excavaciones, albaranes
+- 🎨 PinturApp: pintura, decoración, reformas, presupuestos
+- 🏫 AquíProu: colegios, institutos, bullying, educación
+- 🗳️ Panel Gáldar: política, ayuntamiento, concejales
+- 📞 Demo gratis: contactar si no encaja ninguna
+
+Responde SOLO en JSON:
+{"descripcion":"qué ves en 1-2 frases","apps":[{"icon":"🏗️","nombre":"ObraControl GPS","razon":"por qué encaja en 1 frase","match":"alto"}]}
+Solo 1-3 apps. match: alto, medio o posible.`;
+
+  try {
+    const r = await fetch(WORKER_IA, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:500,
+        messages:[{role:'user',content:[
+          {type:'image',source:{type:'base64',media_type:imgTipoWeb,data:imgBase64Web}},
+          {type:'text',text:prompt}
+        ]}]
+      })
+    });
+    const data = await r.json();
+    const texto = data.content?.[0]?.text || '';
+    let parsed;
+    try { parsed = JSON.parse(texto.replace(/```json|```/g,'').trim()); } catch(e){ parsed=null; }
+
+    if(parsed && parsed.apps){
+      res.innerHTML =
+        '<div class="cr-desc">' + parsed.descripcion + '</div>' +
+        '<div class="cr-apps">' +
+        parsed.apps.map(a =>
+          '<div class="cr-app">' +
+          '<span class="cr-app-icon">' + a.icon + '</span>' +
+          '<div class="cr-app-info">' +
+          '<div class="cr-app-nom">' + a.nombre + '</div>' +
+          '<div class="cr-app-razon">' + a.razon + '</div>' +
+          '</div>' +
+          '<span class="cr-app-match ' + a.match + '">Encaje ' + a.match + '</span>' +
+          '</div>'
+        ).join('') +
+        '</div>' +
+        '<button class="cr-nueva" onclick="nuevaFotoWeb()">📸 Analizar otra imagen</button>';
+    } else {
+      res.innerHTML = '<div class="cr-desc">' + texto + '</div><button class="cr-nueva" onclick="nuevaFotoWeb()">📸 Otra imagen</button>';
+    }
+  } catch(err) {
+    res.innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;padding:0.5rem;">Error al conectar con la IA. Inténtalo de nuevo.</div><button class="cr-nueva" onclick="nuevaFotoWeb()">Reintentar</button>';
+  }
+  btn.disabled = false;
+}
+
+function nuevaFotoWeb(){
+  imgBase64Web = '';
+  document.getElementById('preview-web').style.display = 'none';
+  document.getElementById('preview-web').src = '';
+  document.getElementById('camara-placeholder-web').style.display = 'flex';
+  document.getElementById('btn-analizar-web').style.display = 'none';
+  document.getElementById('camara-resultado-web').style.display = 'none';
+  document.getElementById('input-foto-web').value = '';
+  document.getElementById('input-galeria-web').value = '';
+}
+</script>
+<!-- ===== FIN SECCIÓN CÁMARA IA ===== -->
+
+  <!-- SAT -->
 <section class="sat" id="sat">
   <div class="section-tag" style="color:var(--gold-light)">Servicio técnico</div>
   <h2 class="section-title">Apps gratis.<br>Solo pagas el mantenimiento.</h2>
