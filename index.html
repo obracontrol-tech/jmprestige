@@ -329,6 +329,38 @@ footer p{font-size:0.82rem;color:rgba(255,255,255,0.4);}
   .nav-ai-btn{padding:0.5rem 0.8rem;font-size:0.78rem;}
 }
 </style>
+<script>
+const COOKIE_KEY='jmprestige_cookies';
+function aceptarCookies(){
+  localStorage.setItem(COOKIE_KEY,'aceptado');
+  document.getElementById('cookie-banner').classList.add('oculto');
+  document.getElementById('btn-cookies-config').style.display='block';
+  cargarPixelFacebook();
+}
+function rechazarCookies(){
+  localStorage.setItem(COOKIE_KEY,'rechazado');
+  document.getElementById('cookie-banner').classList.add('oculto');
+  document.getElementById('btn-cookies-config').style.display='block';
+}
+function abrirPolitica(){document.getElementById('modal-privacidad').classList.add('show');}
+function cerrarPolitica(){document.getElementById('modal-privacidad').classList.remove('show');}
+function mostrarBannerOtraVez(){
+  localStorage.removeItem(COOKIE_KEY);
+  document.getElementById('cookie-banner').classList.remove('oculto');
+  document.getElementById('btn-cookies-config').style.display='none';
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  const e=localStorage.getItem(COOKIE_KEY);
+  if(e==='aceptado'){
+    document.getElementById('cookie-banner').classList.add('oculto');
+    document.getElementById('btn-cookies-config').style.display='block';
+    cargarPixelFacebook();
+  } else if(e==='rechazado'){
+    document.getElementById('cookie-banner').classList.add('oculto');
+    document.getElementById('btn-cookies-config').style.display='block';
+  }
+});
+</script>
 </head>
 <body>
 
@@ -636,93 +668,6 @@ function closeModal(e){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal({target:document.getElementById('modal-overlay')});});
 </script>
-<!-- BANNER COOKIES -->
-<style>
-#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:99999;background:linear-gradient(135deg,#111108,#1a1800);border-top:2px solid rgba(200,168,75,0.4);padding:1rem 1.2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;box-shadow:0 -4px 30px rgba(0,0,0,0.6);animation:slideUpCookie 0.4s ease;}
-@keyframes slideUpCookie{from{transform:translateY(100%);}to{transform:translateY(0);}}
-#cookie-banner.oculto{display:none!important;}
-.cookie-texto{flex:1;min-width:200px;}
-.cookie-titulo{font-family:'Playfair Display',serif;font-size:1rem;color:#C9A227;letter-spacing:0.1em;margin-bottom:0.3rem;}
-.cookie-desc{font-size:0.75rem;color:#999;line-height:1.5;}
-.cookie-desc a{color:#C9A227;text-decoration:none;}
-.cookie-btns{display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;}
-.btn-aceptar{background:linear-gradient(135deg,#9a7a2e,#C9A227);color:#0a0a0a;border:none;border-radius:8px;padding:0.6rem 1.2rem;font-size:0.88rem;font-weight:700;cursor:pointer;white-space:nowrap;}
-.btn-rechazar{background:transparent;border:1px solid rgba(200,168,75,0.3);color:#888;border-radius:8px;padding:0.6rem 1rem;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap;}
-#btn-cookies-config{position:fixed;bottom:1rem;left:1rem;z-index:9998;background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.3);color:#C9A227;border-radius:20px;padding:0.3rem 0.7rem;font-size:0.68rem;cursor:pointer;display:none;}
-#modal-privacidad{display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.88);align-items:flex-end;justify-content:center;padding:1rem;}
-#modal-privacidad.show{display:flex;}
-.privacidad-card{background:#1a1a10;border:1px solid rgba(200,168,75,0.25);border-radius:16px 16px 12px 12px;padding:1.5rem;width:100%;max-width:600px;max-height:80vh;overflow-y:auto;}
-.priv-titulo{font-family:'Playfair Display',serif;font-size:1.3rem;color:#C9A227;margin-bottom:1rem;border-bottom:1px solid rgba(200,168,75,0.2);padding-bottom:0.7rem;}
-.priv-texto{font-size:0.82rem;color:#aaa;line-height:1.8;}
-.priv-texto h3{color:#C9A227;font-size:0.9rem;margin:1rem 0 0.4rem;}
-.priv-texto ul{padding-left:1.2rem;margin-bottom:0.8rem;}
-.btn-cerrar-priv{width:100%;background:linear-gradient(135deg,#9a7a2e,#C9A227);color:#0a0a0a;border:none;border-radius:8px;padding:0.8rem;margin-top:1rem;font-size:1rem;font-weight:700;cursor:pointer;}
-</style>
 
-<div id="cookie-banner">
-  <div class="cookie-texto">
-    <div class="cookie-titulo">🍪 Usamos cookies</div>
-    <div class="cookie-desc">
-      Esta web utiliza cookies propias y de terceros (Facebook) para mejorar tu experiencia.
-      Al aceptar consientes su uso según nuestra
-      <a href="#" onclick="abrirPolitica();return false;">Política de Privacidad</a>.
-    </div>
-  </div>
-  <div class="cookie-btns">
-    <button class="btn-rechazar" onclick="rechazarCookies()">Solo esenciales</button>
-    <button class="btn-aceptar" onclick="aceptarCookies()">✓ Aceptar todas</button>
-  </div>
-</div>
-
-<button id="btn-cookies-config" onclick="mostrarBannerOtraVez()">🍪 Cookies</button>
-
-<div id="modal-privacidad">
-  <div class="privacidad-card">
-    <div class="priv-titulo">🔒 Política de Privacidad y Cookies</div>
-    <div class="priv-texto">
-      <h3>1. Responsable</h3>
-      JM Prestige AI Solutions · Juan Manuel Pedrosa · Lleida · info@obracontrolgps.net
-      <h3>2. Cookies que usamos</h3>
-      <ul>
-        <li><strong>Esenciales:</strong> Funcionamiento básico de la web.</li>
-        <li><strong>Facebook Pixel (1250954720555482):</strong> Solo se activa si aceptas. Mide visitas y conversiones.</li>
-      </ul>
-      <h3>3. Tus derechos</h3>
-      Puedes acceder, rectificar o suprimir tus datos escribiendo a <a href="mailto:info@obracontrolgps.net" style="color:#C9A227;">info@obracontrolgps.net</a>
-      <h3>4. Base legal</h3>
-      Consentimiento del usuario (Art. 6.1.a RGPD) y Ley 34/2002 LSSI.
-      <p sty
-<script>
-const COOKIE_KEY='jmprestige_cookies';
-function aceptarCookies(){
-  localStorage.setItem(COOKIE_KEY,'aceptado');
-  document.getElementById('cookie-banner').classList.add('oculto');
-  document.getElementById('btn-cookies-config').style.display='block';
-  cargarPixelFacebook();
-}
-function rechazarCookies(){
-  localStorage.setItem(COOKIE_KEY,'rechazado');
-  document.getElementById('cookie-banner').classList.add('oculto');
-  document.getElementById('btn-cookies-config').style.display='block';
-}
-function abrirPolitica(){document.getElementById('modal-privacidad').classList.add('show');}
-function cerrarPolitica(){document.getElementById('modal-privacidad').classList.remove('show');}
-function mostrarBannerOtraVez(){
-  localStorage.removeItem(COOKIE_KEY);
-  document.getElementById('cookie-banner').classList.remove('oculto');
-  document.getElementById('btn-cookies-config').style.display='none';
-}
-window.addEventListener('DOMContentLoaded',()=>{
-  const e=localStorage.getItem(COOKIE_KEY);
-  if(e==='aceptado'){
-    document.getElementById('cookie-banner').classList.add('oculto');
-    document.getElementById('btn-cookies-config').style.display='block';
-    cargarPixelFacebook();
-  } else if(e==='rechazado'){
-    document.getElementById('cookie-banner').classList.add('oculto');
-    document.getElementById('btn-cookies-config').style.display='block';
-  }
-});
-</script>
         </body>
 </html>
