@@ -692,5 +692,37 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal({target:d
       <h3>4. Base legal</h3>
       Consentimiento del usuario (Art. 6.1.a RGPD) y Ley 34/2002 LSSI.
       <p sty
-</body>
+<script>
+const COOKIE_KEY='jmprestige_cookies';
+function aceptarCookies(){
+  localStorage.setItem(COOKIE_KEY,'aceptado');
+  document.getElementById('cookie-banner').classList.add('oculto');
+  document.getElementById('btn-cookies-config').style.display='block';
+  cargarPixelFacebook();
+}
+function rechazarCookies(){
+  localStorage.setItem(COOKIE_KEY,'rechazado');
+  document.getElementById('cookie-banner').classList.add('oculto');
+  document.getElementById('btn-cookies-config').style.display='block';
+}
+function abrirPolitica(){document.getElementById('modal-privacidad').classList.add('show');}
+function cerrarPolitica(){document.getElementById('modal-privacidad').classList.remove('show');}
+function mostrarBannerOtraVez(){
+  localStorage.removeItem(COOKIE_KEY);
+  document.getElementById('cookie-banner').classList.remove('oculto');
+  document.getElementById('btn-cookies-config').style.display='none';
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  const e=localStorage.getItem(COOKIE_KEY);
+  if(e==='aceptado'){
+    document.getElementById('cookie-banner').classList.add('oculto');
+    document.getElementById('btn-cookies-config').style.display='block';
+    cargarPixelFacebook();
+  } else if(e==='rechazado'){
+    document.getElementById('cookie-banner').classList.add('oculto');
+    document.getElementById('btn-cookies-config').style.display='block';
+  }
+});
+</script>
+        </body>
 </html>
