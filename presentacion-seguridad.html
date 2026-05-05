@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>JM Prestige AI · Solución Digital para Seguridad Privada</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:    #C9A84C;
+    --gold2:   #F0D080;
+    --navy:    #0A1628;
+    --navy2:   #112240;
+    --navy3:   #1a3a5c;
+    --navy4:   #1e4976;
+    --silver:  #A8B8C8;
+    --white:   #FFFFFF;
+    --light:   #E8EEF5;
+    --danger:  #C0392B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Crimson Pro', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* LOADER */
+  #loader {
+    position: fixed; inset: 0;
+    background: var(--navy);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    transition: opacity 0.7s ease;
+  }
+  #loader.hide { opacity: 0; pointer-events: none; }
+
+  .loader-shield {
+    position: relative;
+    animation: shieldPulse 1.2s ease-in-out infinite alternate;
+  }
+
+  .shield-svg { filter: drop-shadow(0 0 20px rgba(201,168,76,0.5)); }
+
+  .loader-text {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .loader-bar {
+    width: 180px; height: 2px;
+    background: rgba(201,168,76,0.2);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .loader-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    animation: loadbar 2s ease forwards;
+  }
+
+  @keyframes shieldPulse { from { transform: scale(0.95); } to { transform: scale(1.05); } }
+  @keyframes loadbar { from { width: 0%; } to { width: 100%; } }
+
+  /* CONTENT */
+  #content { opacity: 0; transition: opacity 0.8s ease; }
+  #content.show { opacity: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 60%, var(--navy3) 100%);
+  }
+
+  /* Diagonal gold line */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    z-index: 0;
+  }
+
+  /* Stars/dots pattern */
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(201,168,76,0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: 0;
+  }
+
+  /* Gold corner accent */
+  .corner-accent {
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    background: linear-gradient(225deg, rgba(201,168,76,0.12) 0%, transparent 60%);
+    z-index: 1;
+  }
+
+  .nav {
+    position: relative; z-index: 2;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .nav-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+  .nav-brand span { color: var(--silver); font-weight: 400; font-size: 11px; display: block; }
+
+  .nav-badge {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 44px 24px 28px;
+    position: relative; z-index: 2;
+  }
+
+  .greeting {
+    font-size: 13px;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 10vw, 58px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .hero-title .line2 {
+    color: var(--gold);
+    display: block;
+    font-size: clamp(28px, 8vw, 46px);
+  }
+
+  .hero-divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 20px 0;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.7s forwards;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--silver);
+    line-height: 1.7;
+    max-width: 340px;
+    margin-bottom: 36px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.8s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: var(--navy);
+    padding: 16px 28px;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1s forwards;
+    width: fit-content;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  }
+  .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(201,168,76,0.5); }
+
+  /* SHIELD MOCKUP */
+  .shield-section {
+    position: relative; z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 24px 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+
+  .shield-mockup {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: floatShield 4s ease-in-out infinite;
+  }
+
+  .shield-big {
+    filter: drop-shadow(0 0 24px rgba(201,168,76,0.4));
+  }
+
+  .shield-app-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .shield-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .shield-feat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeLeft 0.4s ease forwards;
+  }
+  .shield-feat:nth-child(1) { animation-delay: 1.3s; }
+  .shield-feat:nth-child(2) { animation-delay: 1.5s; }
+  .shield-feat:nth-child(3) { animation-delay: 1.7s; }
+  .shield-feat:nth-child(4) { animation-delay: 1.9s; }
+  .shield-feat:nth-child(5) { animation-delay: 2.1s; }
+  .shield-feat:nth-child(6) { animation-delay: 2.3s; }
+
+  .feat-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .feat-text {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--light);
+    letter-spacing: 0.5px;
+  }
+
+  /* GOLD LINE DIVIDER */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+    margin: 0 24px;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 56px 24px;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(26px, 7vw, 40px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .section-title .accent { color: var(--gold); }
+
+  /* PROBLEMS */
+  .problem-item {
+    display: flex;
+    gap: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-left: 3px solid rgba(192,57,43,0.6);
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+  }
+
+  .problem-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+  .problem-text { font-size: 14px; color: var(--silver); line-height: 1.5; }
+  .problem-text strong { color: var(--white); display: block; font-size: 15px; margin-bottom: 2px; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.5px; }
+
+  /* FEATURES */
+  .features-bg {
+    background: var(--navy2);
+    padding: 56px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .features-bg::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .feature-card {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 2px;
+    padding: 18px 14px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+  .feature-card:hover { border-color: rgba(201,168,76,0.5); }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .feature-icon { font-size: 26px; margin-bottom: 8px; display: block; }
+  .feature-title {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: var(--gold2);
+  }
+  .feature-desc { font-size: 12px; color: var(--silver); line-height: 1.4; }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+  }
+
+  .stat-box {
+    background: var(--navy);
+    padding: 28px 16px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Cinzel', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--silver);
+    letter-spacing: 1px;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+  }
+
+  /* PANIC BUTTON HIGHLIGHT */
+  .panic-section {
+    margin: 0 24px 40px;
+    background: linear-gradient(135deg, rgba(192,57,43,0.15), rgba(192,57,43,0.05));
+    border: 1px solid rgba(192,57,43,0.4);
+    border-radius: 4px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panic-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(192,57,43,0.08) 0%, transparent 70%);
+  }
+
+  .panic-icon { font-size: 36px; margin-bottom: 10px; }
+  .panic-title {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #E74C3C;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .panic-text { font-size: 13px; color: var(--silver); line-height: 1.5; }
+
+  /* STEPS */
+  .steps-section { padding: 56px 24px; background: var(--navy2); }
+
+  .step {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 17px; top: 40px;
+    width: 1px;
+    height: calc(100% - 10px);
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+
+  .step-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    color: var(--white);
+  }
+  .step-desc { font-size: 13px; color: var(--silver); line-height: 1.5; }
+
+  /* FINAL CTA */
+  .final-cta {
+    padding: 60px 24px;
+    text-align: center;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+
+  .final-shield {
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    filter: drop-shadow(0 0 16px rgba(201,168,76,0.3));
+    position: relative; z-index: 1;
+  }
+
+  .final-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 8vw, 44px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+  .final-title .accent { color: var(--gold); display: block; }
+
+  .final-sub {
+    font-size: 15px;
+    color: var(--silver);
+    margin-bottom: 36px;
+    line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative; z-index: 1;
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    padding: 18px 24px;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.25);
+  }
+  .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
+
+  .btn-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 16px 24px;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .btn-email:hover { background: rgba(201,168,76,0.1); }
+
+  /* FOOTER */
+  footer {
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    background: var(--navy2);
+  }
+
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .footer-sub { font-size: 12px; color: var(--silver); margin-bottom: 14px; }
+  .footer-links { display: flex; justify-content: center; gap: 20px; }
+  .footer-link { font-size: 11px; color: var(--silver); text-decoration: none; font-family: 'Cinzel', serif; letter-spacing: 1px; }
+  .footer-link:hover { color: var(--gold); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes floatShield {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-shield">
+    <svg class="shield-svg" width="80" height="90" viewBox="0 0 80 90" fill="none">
+      <path d="M40 4L6 18V46C6 64 21 80 40 86C59 80 74 64 74 46V18L40 4Z" fill="#112240" stroke="#C9A84C" stroke-width="2"/>
+      <path d="M40 14L14 25V46C14 61 25 74 40 80C55 74 66 61 66 46V25L40 14Z" fill="#0A1628" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+      <text x="40" y="56" font-family="Georgia" font-size="28" font-weight="bold" fill="#C9A84C" text-anchor="middle">S</text>
+    </svg>
+  </div>
+  <div class="loader-text">Preparando demo...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+  <section class="hero">
+    <div class="corner-accent"></div>
+
+    <nav class="nav">
+      <div class="nav-brand">
+        JM PRESTIGE AI
+        <span>Soluciones Digitales</span>
+      </div>
+      <div class="nav-badge">🛡️ Seguridad</div>
+    </nav>
+
+    <div class="hero-body">
+      <div class="greeting">Hola, <span id="nombre-display">amigo</span></div>
+      <h1 class="hero-title">
+        Protege tu empresa.
+        <span class="line2">Digitaliza tu servicio.</span>
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-sub">
+        Control total de rondas, guardas y partes de servicio. GPS en tiempo real, botón de pánico y panel de mando. Todo desde el móvil.
+      </p>
+      <button class="hero-cta" onclick="scrollToFeatures()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Ver la solución
+      </button>
+    </div>
+
+    <!-- SHIELD + FEATURES -->
+    <div class="shield-section">
+      <div class="shield-mockup">
+        <svg class="shield-big" width="100" height="114" viewBox="0 0 100 114" fill="none">
+          <path d="M50 5L7 22V57C7 80 26 100 50 109C74 100 93 80 93 57V22L50 5Z" fill="#112240" stroke="#C9A84C" stroke-width="2.5"/>
+          <path d="M50 16L18 30V57C18 76 32 93 50 100C68 93 82 76 82 57V30L50 16Z" fill="#0A1628" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+          <text x="50" y="72" font-family="Georgia" font-size="38" font-weight="bold" fill="#C9A84C" text-anchor="middle">S</text>
+        </svg>
+        <div class="shield-app-label">App Seguridad<br/>Privada</div>
+      </div>
+
+      <div class="shield-features-list">
+        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Fichaje GPS de guardas</span></div>
+        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Rondas con checkpoints</span></div>
+        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Botón de pánico</span></div>
+        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Panel en tiempo real</span></div>
+        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Partes diarios PDF</span></div>
+        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">WhatsApp integrado</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- PROBLEMS -->
+  <section class="section reveal">
+    <div class="section-label">El problema</div>
+    <h2 class="section-title">¿Reconoces <span class="accent">esto?</span></h2>
+
+    <div class="problem-item">
+      <span class="problem-icon">📋</span>
+      <div class="problem-text">
+        <strong>Partes de servicio en papel</strong>
+        Horas perdidas rellenando y archivando partes a mano, con errores y pérdidas.
+      </div>
+    </div>
+    <div class="problem-item">
+      <span class="problem-icon">📍</span>
+      <div class="problem-text">
+        <strong>Sin control de rondas real</strong>
+        No puedes demostrar al cliente que el guarda hizo las rondas comprometidas.
+      </div>
+    </div>
+    <div class="problem-item">
+      <span class="problem-icon">🆘</span>
+      <div class="problem-text">
+        <strong>Incidencias sin protocolo claro</strong>
+        Cuando hay una emergencia, el guarda no tiene un sistema rápido de alerta.
+      </div>
+    </div>
+    <div class="problem-item">
+      <span class="problem-icon">📊</span>
+      <div class="problem-text">
+        <strong>Sin informes automáticos</strong>
+        Clientes que piden justificación del servicio y no tienes datos organizados.
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-bg" id="features">
+    <div class="section-label reveal">La solución</div>
+    <h2 class="section-title reveal">Control <span class="accent">total</span></h2>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">📍</span>
+        <div class="feature-title">GPS en tiempo real</div>
+        <div class="feature-desc">Mapa en vivo con la posición exacta de cada guarda en servicio.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🔄</span>
+        <div class="feature-title">Rondas con checkpoints</div>
+        <div class="feature-desc">6 puntos de control verificados y registrados automáticamente.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">⏱️</span>
+        <div class="feature-title">Fichaje de turno</div>
+        <div class="feature-desc">Entrada y salida de servicio con GPS y hora exacta.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📊</span>
+        <div class="feature-title">Panel de mando</div>
+        <div class="feature-desc">Vista en tiempo real desde cualquier dispositivo. Login seguro.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📄</span>
+        <div class="feature-title">Partes PDF automáticos</div>
+        <div class="feature-desc">Informe diario generado con un clic. Listo para el cliente.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">💬</span>
+        <div class="feature-title">WhatsApp integrado</div>
+        <div class="feature-desc">Comunicación directa con mando desde la app.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-row reveal">
+    <div class="stat-box">
+      <div class="stat-number">0€</div>
+      <div class="stat-label">Hardware</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Monitorización</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">3"</div>
+      <div class="stat-label">Botón pánico</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">PDF</div>
+      <div class="stat-label">Partes automáticos</div>
+    </div>
+  </div>
+
+  <!-- PANIC BUTTON -->
+  <div class="panic-section reveal">
+    <div class="panic-icon">🆘</div>
+    <div class="panic-title">BOTÓN DE PÁNICO</div>
+    <div class="panic-text">
+      El guarda mantiene pulsado 3 segundos y se activa una alerta inmediata al mando con su posición GPS exacta. Seguridad real para situaciones críticas.
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <section class="steps-section reveal">
+    <div class="section-label">El proceso</div>
+    <h2 class="section-title">En <span class="accent">3 pasos</span></h2>
+    <br>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Configuramos tu empresa</div>
+        <div class="step-desc">Damos de alta guardas, turnos y puntos de control. Menos de 15 minutos.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Los guardas usan la app</div>
+        <div class="step-desc">Fichan entrada, hacen las rondas y activan el pánico si es necesario. Todo desde el móvil.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Tú controlas y reportas</div>
+        <div class="step-desc">Panel en tiempo real y partes PDF diarios listos para entregar al cliente.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-shield">
+      <svg width="70" height="80" viewBox="0 0 80 90" fill="none">
+        <path d="M40 4L6 18V46C6 64 21 80 40 86C59 80 74 64 74 46V18L40 4Z" fill="#112240" stroke="#C9A84C" stroke-width="2"/>
+        <text x="40" y="56" font-family="Georgia" font-size="28" font-weight="bold" fill="#C9A84C" text-anchor="middle">S</text>
+      </svg>
+    </div>
+    <h2 class="final-title">
+      ¿Lo ponemos
+      <span class="accent">en marcha?</span>
+    </h2>
+    <p class="final-sub" id="cta-sub">
+      Cuéntame cuántos guardas tienes y te preparo una demo personalizada en 24 horas.
+    </p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/34600000000?text=Hola%2C%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad%20y%20me%20interesa%20saber%20m%C3%A1s" class="btn-whatsapp" id="whatsapp-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hablar por WhatsApp
+      </a>
+      <a href="mailto:info@jmprestige.es?subject=Demo%20App%20Seguridad%20Privada" class="btn-email">
+        ✉️ Enviar email
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">JM PRESTIGE AI SOLUTIONS</div>
+    <div class="footer-sub">Soluciones digitales para pymes · Lleida, España</div>
+    <div class="footer-links">
+      <a href="https://obracontrol-tech.github.io/jmprestige" class="footer-link">Web</a>
+      <a href="https://wa.me/34600000000" class="footer-link">WhatsApp</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  function getNombre() {
+    const params = new URLSearchParams(window.location.search);
+    const n = params.get('nombre') || params.get('name') || '';
+    return n.charAt(0).toUpperCase() + n.slice(1).toLowerCase();
+  }
+
+  const nombre = getNombre();
+  if (nombre) {
+    document.getElementById('nombre-display').textContent = nombre;
+    document.getElementById('cta-sub').textContent =
+      nombre + ', cuéntame cuántos guardas tienes y te preparo una demo personalizada en 24 horas.';
+    const wa = document.getElementById('whatsapp-btn');
+    wa.href = `https://wa.me/34600000000?text=Hola%2C%20soy%20${encodeURIComponent(nombre)}%20y%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad.%20Me%20interesa%20saber%20m%C3%A1s.`;
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hide');
+      setTimeout(() => {
+        document.getElementById('content').classList.add('show');
+        initReveal();
+      }, 700);
+    }, 2200);
+  });
+
+  function initReveal() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  }
+
+  function scrollToFeatures() {
+    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
