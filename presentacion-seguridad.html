@@ -4,895 +4,496 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>JM Prestige AI · Solución Digital para Seguridad Privada</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Rajdhani:wght@600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold:    #C9A84C;
-    --gold2:   #F0D080;
-    --navy:    #0A1628;
-    --navy2:   #112240;
-    --navy3:   #1a3a5c;
-    --navy4:   #1e4976;
-    --silver:  #A8B8C8;
-    --white:   #FFFFFF;
-    --light:   #E8EEF5;
-    --danger:  #C0392B;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'Crimson Pro', Georgia, serif;
-    overflow-x: hidden;
-  }
-
-  /* LOADER */
-  #loader {
-    position: fixed; inset: 0;
-    background: var(--navy);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 28px;
-    transition: opacity 0.7s ease;
-  }
-  #loader.hide { opacity: 0; pointer-events: none; }
-
-  .loader-shield {
-    position: relative;
-    animation: shieldPulse 1.2s ease-in-out infinite alternate;
-  }
-
-  .shield-svg { filter: drop-shadow(0 0 20px rgba(201,168,76,0.5)); }
-
-  .loader-text {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    color: var(--gold);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-
-  .loader-bar {
-    width: 180px; height: 2px;
-    background: rgba(201,168,76,0.2);
-    border-radius: 1px;
-    overflow: hidden;
-  }
-  .loader-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold), var(--gold2));
-    animation: loadbar 2s ease forwards;
-  }
-
-  @keyframes shieldPulse { from { transform: scale(0.95); } to { transform: scale(1.05); } }
-  @keyframes loadbar { from { width: 0%; } to { width: 100%; } }
-
-  /* CONTENT */
-  #content { opacity: 0; transition: opacity 0.8s ease; }
-  #content.show { opacity: 1; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 60%, var(--navy3) 100%);
-  }
-
-  /* Diagonal gold line */
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, var(--gold), transparent);
-    z-index: 0;
-  }
-
-  /* Stars/dots pattern */
-  .hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(201,168,76,0.08) 1px, transparent 1px);
-    background-size: 30px 30px;
-    z-index: 0;
-  }
-
-  /* Gold corner accent */
-  .corner-accent {
-    position: absolute;
-    top: 0; right: 0;
-    width: 120px; height: 120px;
-    background: linear-gradient(225deg, rgba(201,168,76,0.12) 0%, transparent 60%);
-    z-index: 1;
-  }
-
-  .nav {
-    position: relative; z-index: 2;
-    padding: 18px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(201,168,76,0.15);
-  }
-
-  .nav-brand {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 2px;
-  }
-  .nav-brand span { color: var(--silver); font-weight: 400; font-size: 11px; display: block; }
-
-  .nav-badge {
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.3);
-    padding: 5px 12px;
-    border-radius: 2px;
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    color: var(--gold);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .hero-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 44px 24px 28px;
-    position: relative; z-index: 2;
-  }
-
-  .greeting {
-    font-size: 13px;
-    color: var(--gold);
-    font-family: 'Cinzel', serif;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.3s forwards;
-  }
-
-  .hero-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(36px, 10vw, 58px);
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 8px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.5s forwards;
-  }
-
-  .hero-title .line2 {
-    color: var(--gold);
-    display: block;
-    font-size: clamp(28px, 8vw, 46px);
-  }
-
-  .hero-divider {
-    width: 60px; height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-    margin: 20px 0;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.7s forwards;
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    color: var(--silver);
-    line-height: 1.7;
-    max-width: 340px;
-    margin-bottom: 36px;
-    font-weight: 300;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.8s forwards;
-  }
-
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, var(--gold), var(--gold2));
-    color: var(--navy);
-    padding: 16px 28px;
-    border: none;
-    border-radius: 2px;
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 1s forwards;
-    width: fit-content;
-    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
-  }
-  .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(201,168,76,0.5); }
-
-  /* SHIELD MOCKUP */
-  .shield-section {
-    position: relative; z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 0 24px 48px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 1.1s forwards;
-  }
-
-  .shield-mockup {
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    animation: floatShield 4s ease-in-out infinite;
-  }
-
-  .shield-big {
-    filter: drop-shadow(0 0 24px rgba(201,168,76,0.4));
-  }
-
-  .shield-app-label {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    color: var(--gold);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-  }
-
-  .shield-features-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .shield-feat {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    opacity: 0;
-    animation: fadeLeft 0.4s ease forwards;
-  }
-  .shield-feat:nth-child(1) { animation-delay: 1.3s; }
-  .shield-feat:nth-child(2) { animation-delay: 1.5s; }
-  .shield-feat:nth-child(3) { animation-delay: 1.7s; }
-  .shield-feat:nth-child(4) { animation-delay: 1.9s; }
-  .shield-feat:nth-child(5) { animation-delay: 2.1s; }
-  .shield-feat:nth-child(6) { animation-delay: 2.3s; }
-
-  .feat-dot {
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .feat-text {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    color: var(--light);
-    letter-spacing: 0.5px;
-  }
-
-  /* GOLD LINE DIVIDER */
-  .gold-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
-    margin: 0 24px;
-  }
-
-  /* SECTIONS */
-  .section {
-    padding: 56px 24px;
-  }
-
-  .section-label {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    color: var(--gold);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .section-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(26px, 7vw, 40px);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 28px;
-  }
-  .section-title .accent { color: var(--gold); }
-
-  /* PROBLEMS */
-  .problem-item {
-    display: flex;
-    gap: 16px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(201,168,76,0.1);
-    border-left: 3px solid rgba(192,57,43,0.6);
-    padding: 16px;
-    margin-bottom: 12px;
-    border-radius: 2px;
-  }
-
-  .problem-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-
-  .problem-text { font-size: 14px; color: var(--silver); line-height: 1.5; }
-  .problem-text strong { color: var(--white); display: block; font-size: 15px; margin-bottom: 2px; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.5px; }
-
-  /* FEATURES */
-  .features-bg {
-    background: var(--navy2);
-    padding: 56px 24px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .features-bg::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 28px;
-  }
-
-  .feature-card {
-    background: var(--navy);
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 2px;
-    padding: 18px 14px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s ease;
-  }
-  .feature-card:hover { border-color: rgba(201,168,76,0.5); }
-
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-  }
-
-  .feature-icon { font-size: 26px; margin-bottom: 8px; display: block; }
-  .feature-title {
-    font-family: 'Cinzel', serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-    color: var(--gold2);
-  }
-  .feature-desc { font-size: 12px; color: var(--silver); line-height: 1.4; }
-
-  /* STATS */
-  .stats-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: rgba(201,168,76,0.1);
-  }
-
-  .stat-box {
-    background: var(--navy);
-    padding: 28px 16px;
-    text-align: center;
-  }
-
-  .stat-number {
-    font-family: 'Cinzel', serif;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--silver);
-    letter-spacing: 1px;
-    font-family: 'Cinzel', serif;
-    text-transform: uppercase;
-  }
-
-  /* PANIC BUTTON HIGHLIGHT */
-  .panic-section {
-    margin: 0 24px 40px;
-    background: linear-gradient(135deg, rgba(192,57,43,0.15), rgba(192,57,43,0.05));
-    border: 1px solid rgba(192,57,43,0.4);
-    border-radius: 4px;
-    padding: 24px 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .panic-section::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(192,57,43,0.08) 0%, transparent 70%);
-  }
-
-  .panic-icon { font-size: 36px; margin-bottom: 10px; }
-  .panic-title {
-    font-family: 'Cinzel', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #E74C3C;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-  .panic-text { font-size: 13px; color: var(--silver); line-height: 1.5; }
-
-  /* STEPS */
-  .steps-section { padding: 56px 24px; background: var(--navy2); }
-
-  .step {
-    display: flex;
-    gap: 18px;
-    margin-bottom: 28px;
-    position: relative;
-  }
-  .step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 17px; top: 40px;
-    width: 1px;
-    height: calc(100% - 10px);
-    background: linear-gradient(180deg, var(--gold), transparent);
-  }
-
-  .step-num {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--gold), var(--gold2));
-    color: var(--navy);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cinzel', serif;
-    font-size: 15px;
-    font-weight: 900;
-    flex-shrink: 0;
-  }
-
-  .step-title {
-    font-family: 'Cinzel', serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-    color: var(--white);
-  }
-  .step-desc { font-size: 13px; color: var(--silver); line-height: 1.5; }
-
-  /* FINAL CTA */
-  .final-cta {
-    padding: 60px 24px;
-    text-align: center;
-    background: var(--navy);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .final-cta::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%);
-  }
-
-  .final-shield {
-    margin: 0 auto 20px;
-    display: flex;
-    justify-content: center;
-    filter: drop-shadow(0 0 16px rgba(201,168,76,0.3));
-    position: relative; z-index: 1;
-  }
-
-  .final-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(28px, 8vw, 44px);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 12px;
-    position: relative; z-index: 1;
-  }
-  .final-title .accent { color: var(--gold); display: block; }
-
-  .final-sub {
-    font-size: 15px;
-    color: var(--silver);
-    margin-bottom: 36px;
-    line-height: 1.6;
-    position: relative; z-index: 1;
-  }
-
-  .cta-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    position: relative; z-index: 1;
-  }
-
-  .btn-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: #25D366;
-    color: #fff;
-    padding: 18px 24px;
-    border-radius: 2px;
-    font-family: 'Cinzel', serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.25);
-  }
-  .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
-
-  .btn-email {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid rgba(201,168,76,0.4);
-    padding: 16px 24px;
-    border-radius: 2px;
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  .btn-email:hover { background: rgba(201,168,76,0.1); }
-
-  /* FOOTER */
-  footer {
-    padding: 28px 24px;
-    text-align: center;
-    border-top: 1px solid rgba(201,168,76,0.15);
-    background: var(--navy2);
-  }
-
-  .footer-brand {
-    font-family: 'Cinzel', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 4px;
-  }
-  .footer-sub { font-size: 12px; color: var(--silver); margin-bottom: 14px; }
-  .footer-links { display: flex; justify-content: center; gap: 20px; }
-  .footer-link { font-size: 11px; color: var(--silver); text-decoration: none; font-family: 'Cinzel', serif; letter-spacing: 1px; }
-  .footer-link:hover { color: var(--gold); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeLeft {
-    from { opacity: 0; transform: translateX(16px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes floatShield {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+:root{
+  --navy:#0a0a18;
+  --navy2:#0f0f28;
+  --gold:#C8960C;
+  --gold-light:#F0C040;
+  --purple:#7c3aed;
+  --purple-soft:rgba(124,58,237,0.15);
+  --red:#dc2626;
+  --green:#4ade80;
+  --white:#ffffff;
+  --gray:rgba(255,255,255,0.55);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:68px;background:rgba(5,5,15,0.96);border-bottom:1px solid rgba(200,150,12,0.2);backdrop-filter:blur(16px);}
+.nav-logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;color:#fff;letter-spacing:0.06em;}
+.nav-logo span{color:var(--gold);}
+.nav-live{display:flex;align-items:center;gap:0.5rem;font-family:'Exo 2',sans-serif;font-size:0.78rem;font-weight:600;color:var(--gold-light);}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(160deg,#060610 0%,#0d0d22 60%,#060610 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9rem 6% 5rem;text-align:center;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,0.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.1) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:halopulse 6s ease-in-out infinite;}
+.hero-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,12,0.07) 0%,transparent 65%);top:20%;right:10%;pointer-events:none;}
+@keyframes halopulse{0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+
+.hero-greeting{font-family:'Exo 2',sans-serif;font-size:0.95rem;font-weight:400;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp 0.5s ease both;}
+.hero-greeting strong{color:var(--gold-light);font-weight:700;}
+
+/* SHIELD SVG animado */
+.shield-wrap{margin:0 auto 2rem;animation:fadeUp 0.6s 0.1s ease both;position:relative;width:100px;height:100px;}
+.shield-pulse{position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(124,58,237,0.3);animation:shieldring 3s ease-in-out infinite;}
+.shield-pulse2{position:absolute;inset:-24px;border-radius:50%;border:1px solid rgba(124,58,237,0.15);animation:shieldring 3s 0.5s ease-in-out infinite;}
+@keyframes shieldring{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:1.2rem;animation:fadeUp 0.6s 0.15s ease both;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-sub{font-size:1rem;font-weight:300;color:var(--gray);line-height:1.75;max-width:580px;margin:0 auto 2.5rem;animation:fadeUp 0.6s 0.25s ease both;}
+
+/* CLIENTE BANNER */
+.client-banner{display:inline-flex;align-items:center;gap:0.8rem;background:rgba(200,150,12,0.1);border:1px solid rgba(200,150,12,0.3);border-radius:8px;padding:0.7rem 1.4rem;margin-bottom:2.5rem;animation:fadeUp 0.6s 0.3s ease both;}
+.client-logo-text{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold-light);letter-spacing:0.08em;}
+.client-badge{font-family:'Exo 2',sans-serif;font-size:0.7rem;font-weight:600;background:rgba(74,222,128,0.15);color:var(--green);border:1px solid rgba(74,222,128,0.3);border-radius:20px;padding:0.2rem 0.7rem;}
+
+.hero-pills{display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;animation:fadeUp 0.6s 0.35s ease both;}
+.pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.65);padding:0.4rem 0.9rem;border-radius:20px;font-size:0.8rem;font-family:'Exo 2',sans-serif;font-weight:600;}
+.pill.gold{background:rgba(200,150,12,0.12);border-color:rgba(200,150,12,0.35);color:var(--gold-light);}
+.pill.red{background:rgba(220,38,38,0.12);border-color:rgba(220,38,38,0.35);color:#fca5a5;}
+
+.btn-hero{display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#C8960C,#F0C040);color:#0a0a18;padding:1rem 2.5rem;border-radius:6px;font-weight:700;font-size:1rem;text-decoration:none;transition:all 0.25s;box-shadow:0 6px 30px rgba(200,150,12,0.35);animation:fadeUp 0.6s 0.4s ease both;}
+.btn-hero:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(200,150,12,0.5);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* CASO REAL */
+.caso-real{padding:5rem 6%;background:linear-gradient(135deg,#0d0d22,#12122e);position:relative;overflow:hidden;}
+.caso-real::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(200,150,12,0.06) 0%,transparent 65%);border-radius:50%;pointer-events:none;}
+.section-tag{font-family:'Exo 2',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;line-height:1.2;margin-bottom:1rem;}
+.section-sub{font-size:0.95rem;color:var(--gray);max-width:560px;line-height:1.7;margin-bottom:2.5rem;}
+
+.caso-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;}
+.caso-left{}
+.caso-card{background:rgba(255,255,255,0.03);border:1px solid rgba(200,150,12,0.2);border-radius:16px;padding:2rem;position:relative;overflow:hidden;}
+.caso-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+.caso-empresa{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.caso-shield-icon{width:50px;height:50px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.caso-empresa-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;}
+.caso-empresa-loc{font-family:'Exo 2',sans-serif;font-size:0.75rem;color:var(--gray);}
+.caso-licencia{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);color:#fca5a5;font-family:'Exo 2',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;padding:0.25rem 0.7rem;border-radius:20px;margin-bottom:1.2rem;}
+.caso-servicios{display:flex;flex-direction:column;gap:0.6rem;}
+.caso-servicio{display:flex;align-items:center;gap:0.7rem;font-size:0.88rem;color:rgba(255,255,255,0.75);}
+.caso-servicio-icon{width:28px;height:28px;border-radius:6px;background:rgba(200,150,12,0.1);border:1px solid rgba(200,150,12,0.2);display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;}
+
+.caso-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+.caso-stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1rem;text-align:center;}
+.caso-stat-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--gold);}
+.caso-stat-label{font-family:'Exo 2',sans-serif;font-size:0.7rem;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.2rem;}
+
+/* PROBLEMA */
+.problema{padding:5rem 6%;background:var(--navy);}
+.problema-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2.5rem;}
+.problema-card{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.15);border-radius:12px;padding:1.5rem;transition:all 0.3s;}
+.problema-card:hover{border-color:rgba(220,38,38,0.35);transform:translateY(-3px);}
+.problema-icon{font-size:1.6rem;margin-bottom:0.8rem;display:block;}
+.problema-card h3{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.5rem;}
+.problema-card p{font-size:0.84rem;color:var(--gray);line-height:1.6;}
+
+/* SOLUCION */
+.solucion{padding:5rem 6%;background:linear-gradient(160deg,#0d0d22,#0a0a18);}
+.solucion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.sol-card{background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.2);border-radius:14px;padding:1.8rem;transition:all 0.3s;position:relative;overflow:hidden;}
+.sol-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--purple),transparent);}
+.sol-card:hover{border-color:rgba(124,58,237,0.45);transform:translateY(-4px);}
+.sol-icon{font-size:1.8rem;margin-bottom:1rem;display:block;}
+.sol-card h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:0.5rem;}
+.sol-card p{font-size:0.86rem;color:var(--gray);line-height:1.65;}
+.sol-tag{display:inline-block;margin-top:0.8rem;font-family:'Exo 2',sans-serif;font-size:0.7rem;font-weight:700;color:var(--gold-light);letter-spacing:0.08em;}
+
+/* PANICO */
+.panico{padding:4rem 6%;background:linear-gradient(135deg,rgba(220,38,38,0.08),rgba(10,10,24,0.9));border-top:1px solid rgba(220,38,38,0.15);border-bottom:1px solid rgba(220,38,38,0.15);}
+.panico-inner{display:flex;align-items:center;gap:3rem;max-width:900px;margin:0 auto;flex-wrap:wrap;}
+.panico-btn-visual{width:100px;height:100px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:2.5rem;flex-shrink:0;box-shadow:0 0 0 12px rgba(220,38,38,0.15),0 0 0 24px rgba(220,38,38,0.07);animation:panicpulse 2.5s ease-in-out infinite;}
+@keyframes panicpulse{0%,100%{box-shadow:0 0 0 12px rgba(220,38,38,0.15),0 0 0 24px rgba(220,38,38,0.07)}50%{box-shadow:0 0 0 18px rgba(220,38,38,0.2),0 0 0 36px rgba(220,38,38,0.05)}}
+.panico-text h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:0.7rem;}
+.panico-text h3 span{color:#fca5a5;}
+.panico-text p{font-size:0.92rem;color:var(--gray);line-height:1.7;max-width:500px;}
+.panico-stats{display:flex;gap:2rem;margin-top:1.2rem;flex-wrap:wrap;}
+.p-stat{text-align:center;}
+.p-stat-num{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;color:#fca5a5;}
+.p-stat-label{font-size:0.72rem;font-family:'Exo 2',sans-serif;color:var(--gray);}
+
+/* PASOS */
+.pasos{padding:5rem 6%;background:var(--navy);}
+.pasos-list{display:flex;flex-direction:column;gap:0;max-width:640px;margin:2.5rem auto 0;}
+.paso{display:flex;gap:1.5rem;align-items:flex-start;padding-bottom:2.5rem;position:relative;}
+.paso:not(:last-child)::after{content:'';position:absolute;left:20px;top:48px;bottom:0;width:1px;background:linear-gradient(180deg,rgba(200,150,12,0.4),transparent);}
+.paso-num{width:42px;height:42px;border-radius:50%;background:rgba(200,150,12,0.1);border:1px solid rgba(200,150,12,0.4);color:var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;flex-shrink:0;position:relative;z-index:1;}
+.paso-content h3{font-weight:700;font-size:0.98rem;color:#fff;margin-bottom:0.35rem;}
+.paso-content p{font-size:0.87rem;color:var(--gray);line-height:1.65;}
+
+/* DEMO PHONE */
+.demo{padding:5rem 6%;background:linear-gradient(160deg,#0d0d22,#0a0a18);text-align:center;}
+.phone-outer{display:inline-block;position:relative;margin-top:3rem;}
+.phone-aura{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.15) 0%,transparent 70%);animation:halopulse 4s ease-in-out infinite;pointer-events:none;}
+.phone-frame{width:220px;background:#0d1420;border-radius:36px;border:2px solid #1e2d4a;overflow:hidden;box-shadow:0 0 0 1px rgba(124,58,237,0.1),0 40px 100px rgba(0,0,0,0.7);animation:phonefloat 5s ease-in-out infinite;display:inline-block;}
+@keyframes phonefloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.ph-notch{height:20px;background:#0d1420;display:flex;align-items:center;justify-content:center;}
+.ph-cam{width:8px;height:8px;border-radius:50%;background:#1a2540;}
+.ph-screen{background:#0a0e1a;min-height:400px;display:flex;flex-direction:column;overflow:hidden;}
+.ph-statusbar{display:flex;align-items:center;justify-content:space-between;padding:6px 14px;font-family:'Exo 2',sans-serif;font-size:9px;color:rgba(255,255,255,0.6);}
+.ph-icons{display:flex;gap:3px;align-items:center;}
+.ph-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.4);}
+/* App screen content */
+.ph-appbar{background:rgba(124,58,237,0.2);border-bottom:1px solid rgba(124,58,237,0.3);padding:8px 12px;display:flex;align-items:center;gap:6px;}
+.ph-shield{width:20px;height:20px;background:var(--gold);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
+.ph-appname{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;color:#fff;}
+.ph-live{width:6px;height:6px;border-radius:50%;background:var(--green);margin-left:auto;animation:pulse 2s infinite;}
+.ph-body{padding:10px 12px;flex:1;display:flex;flex-direction:column;gap:8px;}
+.ph-section-label{font-family:'Exo 2',sans-serif;font-size:7px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:2px;}
+.ph-checkpoint{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 8px;}
+.ph-cp-icon{font-size:9px;}.ph-cp-name{font-family:'Exo 2',sans-serif;font-size:8px;font-weight:600;color:rgba(255,255,255,0.75);flex:1;}.ph-cp-time{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.35);}
+.ph-checkpoint.ok{border-left:2px solid var(--green);}
+.ph-checkpoint.pending{border-left:2px solid rgba(255,255,255,0.15);}
+.ph-panicbtn{background:var(--red);border:none;border-radius:8px;padding:9px;width:100%;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;color:#fff;letter-spacing:0.08em;text-align:center;margin-top:4px;}
+.ph-gps{display:flex;align-items:center;gap:5px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:6px;padding:5px 8px;}
+.ph-gps-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.ph-gps-txt{font-family:'Exo 2',sans-serif;font-size:7px;color:rgba(255,255,255,0.5);}
+.ph-bottom{height:26px;background:#0d1420;display:flex;align-items:center;justify-content:center;gap:18px;}
+.ph-btri{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid #1e2d4a;}
+.ph-bdot{width:6px;height:6px;border-radius:50%;background:#1e2d4a;}
+.ph-bsq{width:6px;height:6px;border:1px solid #1e2d4a;border-radius:2px;}
+
+/* CTA */
+.cta{padding:6rem 6%;background:linear-gradient(160deg,#0d0d22,var(--navy));text-align:center;}
+.cta-box{max-width:600px;margin:0 auto;background:rgba(255,255,255,0.02);border:1px solid rgba(200,150,12,0.25);border-radius:20px;padding:3.5rem 2.5rem;position:relative;overflow:hidden;}
+.cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 10%,rgba(200,150,12,0.08) 0%,transparent 60%);pointer-events:none;}
+.cta-box h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;margin-bottom:1rem;position:relative;z-index:1;}
+.cta-box h2 span{color:var(--gold);}
+.cta-box p{color:var(--gray);font-size:0.95rem;line-height:1.7;margin-bottom:2rem;position:relative;z-index:1;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-wa{display:inline-flex;align-items:center;gap:0.6rem;background:#25d366;color:#0a0a18;padding:0.9rem 2rem;border-radius:6px;font-weight:700;font-size:0.95rem;text-decoration:none;transition:all 0.25s;box-shadow:0 4px 20px rgba(37,211,102,0.3);}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,0.4);}
+.btn-email{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--gold-light);padding:0.9rem 2rem;border-radius:6px;font-weight:600;font-size:0.95rem;text-decoration:none;border:1px solid rgba(200,150,12,0.35);transition:all 0.25s;}
+.btn-email:hover{border-color:var(--gold);color:var(--gold);}
+
+footer{background:#05050f;border-top:1px solid rgba(200,150,12,0.15);padding:2rem 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-brand{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;}
+.footer-brand span{color:var(--gold);}
+footer p{font-size:0.8rem;color:rgba(255,255,255,0.3);}
+
+@media(max-width:768px){
+  .caso-grid{grid-template-columns:1fr;}
+  .panico-inner{flex-direction:column;text-align:center;}
+  .panico-stats{justify-content:center;}
+  nav{padding:0 4%;}
+  .hero,.caso-real,.problema,.solucion,.pasos,.demo,.cta{padding-left:5%;padding-right:5%;}
+}
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-shield">
-    <svg class="shield-svg" width="80" height="90" viewBox="0 0 80 90" fill="none">
-      <path d="M40 4L6 18V46C6 64 21 80 40 86C59 80 74 64 74 46V18L40 4Z" fill="#112240" stroke="#C9A84C" stroke-width="2"/>
-      <path d="M40 14L14 25V46C14 61 25 74 40 80C55 74 66 61 66 46V25L40 14Z" fill="#0A1628" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
-      <text x="40" y="56" font-family="Georgia" font-size="28" font-weight="bold" fill="#C9A84C" text-anchor="middle">S</text>
+<nav>
+  <div class="nav-logo">JM <span>Prestige</span> AI</div>
+  <div class="nav-live"><div class="nav-dot"></div>App en producción</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-greeting" id="hero-greeting">Hola, <strong id="nombre-display">amigo</strong></div>
+
+  <!-- Shield animado SVG -->
+  <div class="shield-wrap">
+    <div class="shield-pulse"></div>
+    <div class="shield-pulse2"></div>
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 8L14 22V48C14 68 30 84 50 92C70 84 86 68 86 48V22L50 8Z" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
+      <path d="M50 18L22 29V48C22 64 34 77 50 84C66 77 78 64 78 48V29L50 18Z" fill="rgba(124,58,237,0.1)" stroke="rgba(200,150,12,0.4)" stroke-width="1"/>
+      <path d="M38 50L46 58L62 42" stroke="#F0C040" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-  <div class="loader-text">Preparando demo...</div>
-  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-</div>
 
-<!-- CONTENT -->
-<div id="content">
+  <h1>Protege tu empresa.<br><em>Digitaliza tu servicio.</em></h1>
+  <p class="hero-sub">Control total de rondas, guardas y partes de servicio. GPS en tiempo real, botón de pánico y panel de mando. Todo desde el móvil, sin hardware adicional.</p>
 
-  <section class="hero">
-    <div class="corner-accent"></div>
-
-    <nav class="nav">
-      <div class="nav-brand">
-        JM PRESTIGE AI
-        <span>Soluciones Digitales</span>
-      </div>
-      <div class="nav-badge">🛡️ Seguridad</div>
-    </nav>
-
-    <div class="hero-body">
-      <div class="greeting">Hola, <span id="nombre-display">amigo</span></div>
-      <h1 class="hero-title">
-        Protege tu empresa.
-        <span class="line2">Digitaliza tu servicio.</span>
-      </h1>
-      <div class="hero-divider"></div>
-      <p class="hero-sub">
-        Control total de rondas, guardas y partes de servicio. GPS en tiempo real, botón de pánico y panel de mando. Todo desde el móvil.
-      </p>
-      <button class="hero-cta" onclick="scrollToFeatures()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Ver la solución
-      </button>
-    </div>
-
-    <!-- SHIELD + FEATURES -->
-    <div class="shield-section">
-      <div class="shield-mockup">
-        <svg class="shield-big" width="100" height="114" viewBox="0 0 100 114" fill="none">
-          <path d="M50 5L7 22V57C7 80 26 100 50 109C74 100 93 80 93 57V22L50 5Z" fill="#112240" stroke="#C9A84C" stroke-width="2.5"/>
-          <path d="M50 16L18 30V57C18 76 32 93 50 100C68 93 82 76 82 57V30L50 16Z" fill="#0A1628" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
-          <text x="50" y="72" font-family="Georgia" font-size="38" font-weight="bold" fill="#C9A84C" text-anchor="middle">S</text>
-        </svg>
-        <div class="shield-app-label">App Seguridad<br/>Privada</div>
-      </div>
-
-      <div class="shield-features-list">
-        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Fichaje GPS de guardas</span></div>
-        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Rondas con checkpoints</span></div>
-        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Botón de pánico</span></div>
-        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Panel en tiempo real</span></div>
-        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">Partes diarios PDF</span></div>
-        <div class="shield-feat"><div class="feat-dot"></div><span class="feat-text">WhatsApp integrado</span></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="gold-divider"></div>
-
-  <!-- PROBLEMS -->
-  <section class="section reveal">
-    <div class="section-label">El problema</div>
-    <h2 class="section-title">¿Reconoces <span class="accent">esto?</span></h2>
-
-    <div class="problem-item">
-      <span class="problem-icon">📋</span>
-      <div class="problem-text">
-        <strong>Partes de servicio en papel</strong>
-        Horas perdidas rellenando y archivando partes a mano, con errores y pérdidas.
-      </div>
-    </div>
-    <div class="problem-item">
-      <span class="problem-icon">📍</span>
-      <div class="problem-text">
-        <strong>Sin control de rondas real</strong>
-        No puedes demostrar al cliente que el guarda hizo las rondas comprometidas.
-      </div>
-    </div>
-    <div class="problem-item">
-      <span class="problem-icon">🆘</span>
-      <div class="problem-text">
-        <strong>Incidencias sin protocolo claro</strong>
-        Cuando hay una emergencia, el guarda no tiene un sistema rápido de alerta.
-      </div>
-    </div>
-    <div class="problem-item">
-      <span class="problem-icon">📊</span>
-      <div class="problem-text">
-        <strong>Sin informes automáticos</strong>
-        Clientes que piden justificación del servicio y no tienes datos organizados.
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features-bg" id="features">
-    <div class="section-label reveal">La solución</div>
-    <h2 class="section-title reveal">Control <span class="accent">total</span></h2>
-
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <span class="feature-icon">📍</span>
-        <div class="feature-title">GPS en tiempo real</div>
-        <div class="feature-desc">Mapa en vivo con la posición exacta de cada guarda en servicio.</div>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">🔄</span>
-        <div class="feature-title">Rondas con checkpoints</div>
-        <div class="feature-desc">6 puntos de control verificados y registrados automáticamente.</div>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">⏱️</span>
-        <div class="feature-title">Fichaje de turno</div>
-        <div class="feature-desc">Entrada y salida de servicio con GPS y hora exacta.</div>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">📊</span>
-        <div class="feature-title">Panel de mando</div>
-        <div class="feature-desc">Vista en tiempo real desde cualquier dispositivo. Login seguro.</div>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">📄</span>
-        <div class="feature-title">Partes PDF automáticos</div>
-        <div class="feature-desc">Informe diario generado con un clic. Listo para el cliente.</div>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">💬</span>
-        <div class="feature-title">WhatsApp integrado</div>
-        <div class="feature-desc">Comunicación directa con mando desde la app.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats-row reveal">
-    <div class="stat-box">
-      <div class="stat-number">0€</div>
-      <div class="stat-label">Hardware</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">Monitorización</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number">3"</div>
-      <div class="stat-label">Botón pánico</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number">PDF</div>
-      <div class="stat-label">Partes automáticos</div>
-    </div>
+  <div class="client-banner">
+    <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 8L14 22V48C14 68 30 84 50 92C70 84 86 68 86 48V22L50 8Z" fill="rgba(200,150,12,0.3)" stroke="rgba(200,150,12,0.8)" stroke-width="2"/><path d="M38 50L46 58L62 42" stroke="#F0C040" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="client-logo-text">MARCIUS SEGURIDAD</span>
+    <span class="client-badge">✓ Ya usa esta app</span>
   </div>
 
-  <!-- PANIC BUTTON -->
-  <div class="panic-section reveal">
-    <div class="panic-icon">🆘</div>
-    <div class="panic-title">BOTÓN DE PÁNICO</div>
-    <div class="panic-text">
-      El guarda mantiene pulsado 3 segundos y se activa una alerta inmediata al mando con su posición GPS exacta. Seguridad real para situaciones críticas.
-    </div>
+  <div class="hero-pills">
+    <span class="pill">📍 GPS tiempo real</span>
+    <span class="pill">🔄 Rondas con checkpoints</span>
+    <span class="pill gold">🆘 Botón de pánico</span>
+    <span class="pill">📄 Partes PDF automáticos</span>
+    <span class="pill red">🔫 Licencia de armas</span>
+    <span class="pill">0€ hardware</span>
   </div>
 
-  <!-- STEPS -->
-  <section class="steps-section reveal">
-    <div class="section-label">El proceso</div>
-    <h2 class="section-title">En <span class="accent">3 pasos</span></h2>
-    <br>
-    <div class="step">
-      <div class="step-num">1</div>
-      <div>
-        <div class="step-title">Configuramos tu empresa</div>
-        <div class="step-desc">Damos de alta guardas, turnos y puntos de control. Menos de 15 minutos.</div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div>
-        <div class="step-title">Los guardas usan la app</div>
-        <div class="step-desc">Fichan entrada, hacen las rondas y activan el pánico si es necesario. Todo desde el móvil.</div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div>
-        <div class="step-title">Tú controlas y reportas</div>
-        <div class="step-desc">Panel en tiempo real y partes PDF diarios listos para entregar al cliente.</div>
-      </div>
-    </div>
-  </section>
+  <a href="https://wa.me/34643223301?text=Hola%2C%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad%20y%20me%20interesa%20saber%20m%C3%A1s" class="btn-hero" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.5l5.819-1.525A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.919 9.919 0 01-5.058-1.384l-.363-.215-3.754.984 1.003-3.651-.236-.374A9.865 9.865 0 012.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/></svg>
+    Ver la solución
+  </a>
+</section>
 
-  <!-- FINAL CTA -->
-  <section class="final-cta">
-    <div class="final-shield">
-      <svg width="70" height="80" viewBox="0 0 80 90" fill="none">
-        <path d="M40 4L6 18V46C6 64 21 80 40 86C59 80 74 64 74 46V18L40 4Z" fill="#112240" stroke="#C9A84C" stroke-width="2"/>
-        <text x="40" y="56" font-family="Georgia" font-size="28" font-weight="bold" fill="#C9A84C" text-anchor="middle">S</text>
-      </svg>
+<!-- CASO REAL: MARCIUS -->
+<section class="caso-real">
+  <div class="section-tag">Caso real · Cliente activo</div>
+  <h2 class="section-title">Ya funciona en una empresa<br>de seguridad privada real</h2>
+  <p class="section-sub">Marcius Seguridad ya gestiona sus guardas, rondas e incidencias con esta misma app. Tu empresa puede tenerla funcionando en menos de 24 horas.</p>
+
+  <div class="caso-grid">
+    <div>
+      <div class="caso-card">
+        <div class="caso-empresa">
+          <div class="caso-shield-icon">🛡️</div>
+          <div>
+            <div class="caso-empresa-name">MARCIUS SEGURIDAD SL</div>
+            <div class="caso-empresa-loc">Sevilla · Andalucía · Ceuta · Melilla</div>
+          </div>
+        </div>
+        <div class="caso-licencia">🔫 Licencia de armas — Alta seguridad</div>
+        <div class="caso-servicios">
+          <div class="caso-servicio"><div class="caso-servicio-icon">👤</div>Escolta privado con habilitación oficial</div>
+          <div class="caso-servicio"><div class="caso-servicio-icon">🏢</div>Vigilancia de establecimientos y urbanizaciones</div>
+          <div class="caso-servicio"><div class="caso-servicio-icon">🎪</div>Vigilancia en eventos oficiales y producciones</div>
+          <div class="caso-servicio"><div class="caso-servicio-icon">📦</div>Protección de mercancías valiosas</div>
+          <div class="caso-servicio"><div class="caso-servicio-icon">🤝</div>Colaboración con cuerpos policiales</div>
+        </div>
+        <div class="caso-stats">
+          <div class="caso-stat"><div class="caso-stat-num">24h</div><div class="caso-stat-label">Implantación</div></div>
+          <div class="caso-stat"><div class="caso-stat-num">0€</div><div class="caso-stat-label">Hardware extra</div></div>
+          <div class="caso-stat"><div class="caso-stat-num">100%</div><div class="caso-stat-label">Móvil · PWA</div></div>
+          <div class="caso-stat"><div class="caso-stat-num">PDF</div><div class="caso-stat-label">Partes automáticos</div></div>
+        </div>
+      </div>
     </div>
-    <h2 class="final-title">
-      ¿Lo ponemos
-      <span class="accent">en marcha?</span>
-    </h2>
-    <p class="final-sub" id="cta-sub">
-      Cuéntame cuántos guardas tienes y te preparo una demo personalizada en 24 horas.
-    </p>
-    <div class="cta-buttons">
-      <a href="https://wa.me/34643223301?text=Hola%2C%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad%20y%20me%20interesa%20saber%20m%C3%A1s" class="btn-whatsapp" id="whatsapp-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+    <!-- Phone mockup lado derecho -->
+    <div style="display:flex;align-items:center;justify-content:center;">
+      <div class="phone-outer" style="margin-top:0;">
+        <div class="phone-aura"></div>
+        <div class="phone-frame">
+          <div class="ph-notch"><div class="ph-cam"></div></div>
+          <div class="ph-screen">
+            <div class="ph-statusbar"><span>21:04</span><div class="ph-icons"><div class="ph-dot"></div><div class="ph-dot"></div><div class="ph-dot"></div></div></div>
+            <div class="ph-appbar">
+              <div class="ph-shield">🛡️</div>
+              <span class="ph-appname">Marcius Seguridad</span>
+              <div class="ph-live"></div>
+            </div>
+            <div class="ph-body">
+              <div class="ph-panicbtn">🆘 BOTÓN DE PÁNICO — 3s</div>
+              <div class="ph-gps">
+                <div class="ph-gps-dot"></div>
+                <span class="ph-gps-txt">GPS activo · Sevilla Centro · Turno activo</span>
+              </div>
+              <div class="ph-section-label">Ronda en curso</div>
+              <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Entrada principal</span><span class="ph-cp-time">21:00</span></div>
+              <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Zona aparcamiento</span><span class="ph-cp-time">21:08</span></div>
+              <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Planta baja</span><span class="ph-cp-time">21:15</span></div>
+              <div class="ph-checkpoint pending"><span class="ph-cp-icon">⏳</span><span class="ph-cp-name">Planta 1 · Zona B</span><span class="ph-cp-time">—</span></div>
+              <div class="ph-checkpoint pending"><span class="ph-cp-icon">⏳</span><span class="ph-cp-name">Acceso trasero</span><span class="ph-cp-time">—</span></div>
+            </div>
+          </div>
+          <div class="ph-bottom"><div class="ph-btri"></div><div class="ph-bdot"></div><div class="ph-bsq"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problema">
+  <div class="section-tag">El problema</div>
+  <h2 class="section-title">¿Reconoces esto<br>en tu empresa?</h2>
+  <div class="problema-grid">
+    <div class="problema-card">
+      <span class="problema-icon">📋</span>
+      <h3>Partes de servicio en papel</h3>
+      <p>Horas perdidas rellenando y archivando partes a mano, con errores, pérdidas y sin trazabilidad.</p>
+    </div>
+    <div class="problema-card">
+      <span class="problema-icon">📍</span>
+      <h3>Sin control de rondas real</h3>
+      <p>No puedes demostrar al cliente que el guarda hizo las rondas comprometidas en el contrato.</p>
+    </div>
+    <div class="problema-card">
+      <span class="problema-icon">🆘</span>
+      <h3>Incidencias sin protocolo claro</h3>
+      <p>Cuando hay una emergencia, el guarda no tiene un sistema rápido de alerta al mando.</p>
+    </div>
+    <div class="problema-card">
+      <span class="problema-icon">📊</span>
+      <h3>Sin informes automáticos</h3>
+      <p>Clientes que piden justificación del servicio y no tienes los datos organizados para dárselos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCIÓN -->
+<section class="solucion">
+  <div class="section-tag">La solución</div>
+  <h2 class="section-title">Control total<br>desde el móvil</h2>
+  <p class="section-sub">Todo lo que necesita una empresa de seguridad privada en una sola app. Sin instalar nada, sin hardware, desde cualquier móvil.</p>
+  <div class="solucion-grid">
+    <div class="sol-card">
+      <span class="sol-icon">📍</span>
+      <h3>GPS en tiempo real</h3>
+      <p>Mapa en vivo con la posición exacta de cada guarda en servicio. El mando ve todo desde el panel.</p>
+      <span class="sol-tag">→ Mapa en vivo · Firebase sync</span>
+    </div>
+    <div class="sol-card">
+      <span class="sol-icon">🔄</span>
+      <h3>Rondas con checkpoints</h3>
+      <p>Puntos de control verificados y registrados automáticamente. Demostrable al cliente en cualquier momento.</p>
+      <span class="sol-tag">→ Hasta 20 checkpoints por ronda</span>
+    </div>
+    <div class="sol-card">
+      <span class="sol-icon">⏱️</span>
+      <h3>Fichaje de turno</h3>
+      <p>Entrada y salida de servicio con GPS y hora exacta. Sin papel, sin llamadas para confirmar.</p>
+      <span class="sol-tag">→ Registro automático e inalterable</span>
+    </div>
+    <div class="sol-card">
+      <span class="sol-icon">📊</span>
+      <h3>Panel de mando</h3>
+      <p>Vista en tiempo real desde cualquier dispositivo. Login seguro solo para el coordinador o gerente.</p>
+      <span class="sol-tag">→ Acceso desde PC, tablet o móvil</span>
+    </div>
+    <div class="sol-card">
+      <span class="sol-icon">📄</span>
+      <h3>Partes PDF automáticos</h3>
+      <p>Informe diario generado con un clic. Listo para entregar al cliente con todos los datos del turno.</p>
+      <span class="sol-tag">→ PDF con firma y sello de la empresa</span>
+    </div>
+    <div class="sol-card">
+      <span class="sol-icon">💬</span>
+      <h3>WhatsApp integrado</h3>
+      <p>Comunicación directa del guarda con el mando desde la propia app. Sin cambiar de herramienta.</p>
+      <span class="sol-tag">→ Integración nativa con WhatsApp</span>
+    </div>
+  </div>
+</section>
+
+<!-- BOTÓN DE PÁNICO -->
+<section class="panico">
+  <div class="panico-inner">
+    <div class="panico-btn-visual">🆘</div>
+    <div class="panico-text">
+      <h3>Botón de <span>pánico</span> integrado</h3>
+      <p>El guarda mantiene pulsado 3 segundos y se activa una alerta inmediata al mando con su posición GPS exacta. Seguridad real para situaciones críticas. Fundamental en servicios con licencia de armas.</p>
+      <div class="panico-stats">
+        <div class="p-stat"><div class="p-stat-num">3"</div><div class="p-stat-label">Para activar</div></div>
+        <div class="p-stat"><div class="p-stat-num">GPS</div><div class="p-stat-label">Posición exacta</div></div>
+        <div class="p-stat"><div class="p-stat-num">24/7</div><div class="p-stat-label">Siempre activo</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PASOS -->
+<section class="pasos">
+  <div class="section-tag">El proceso</div>
+  <h2 class="section-title" style="text-align:center;">En 3 pasos,<br>tu empresa digitalizada</h2>
+  <div class="pasos-list">
+    <div class="paso">
+      <div class="paso-num">1</div>
+      <div class="paso-content">
+        <h3>Configuramos tu empresa</h3>
+        <p>Damos de alta guardas, turnos y puntos de control. Menos de 15 minutos. Sin instalar nada en los móviles de los guardas.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">2</div>
+      <div class="paso-content">
+        <h3>Los guardas usan la app</h3>
+        <p>Fichan la entrada, hacen las rondas tocando los checkpoints y activan el botón de pánico si es necesario. Todo desde el móvil.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">3</div>
+      <div class="paso-content">
+        <h3>Tú controlas y reportas</h3>
+        <p>Panel en tiempo real accesible desde cualquier dispositivo. Partes PDF diarios listos para entregar al cliente con un clic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO PHONE (grande, centrado) -->
+<section class="demo">
+  <div class="section-tag" style="text-align:center;">La app en acción</div>
+  <h2 class="section-title" style="text-align:center;">Así la ve el guarda<br>en su móvil</h2>
+  <div class="phone-outer">
+    <div class="phone-aura"></div>
+    <div class="phone-frame">
+      <div class="ph-notch"><div class="ph-cam"></div></div>
+      <div class="ph-screen">
+        <div class="ph-statusbar"><span>22:30</span><div class="ph-icons"><div class="ph-dot"></div><div class="ph-dot"></div><div class="ph-dot"></div></div></div>
+        <div class="ph-appbar">
+          <div class="ph-shield">🛡️</div>
+          <span class="ph-appname">App Seguridad · Turno nocturno</span>
+          <div class="ph-live"></div>
+        </div>
+        <div class="ph-body">
+          <div class="ph-panicbtn">🆘 BOTÓN DE PÁNICO — Mantén 3s</div>
+          <div class="ph-gps">
+            <div class="ph-gps-dot"></div>
+            <span class="ph-gps-txt">GPS activo · Turno: 22:00 → 06:00 · 2h 30min</span>
+          </div>
+          <div class="ph-section-label">Ronda 3 de 6 — En curso</div>
+          <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Entrada principal</span><span class="ph-cp-time">22:05</span></div>
+          <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Parking exterior</span><span class="ph-cp-time">22:12</span></div>
+          <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Recepción</span><span class="ph-cp-time">22:20</span></div>
+          <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Planta baja</span><span class="ph-cp-time">22:28</span></div>
+          <div class="ph-checkpoint pending"><span class="ph-cp-icon">⏳</span><span class="ph-cp-name">Planta 1</span><span class="ph-cp-time">—</span></div>
+          <div class="ph-checkpoint pending"><span class="ph-cp-icon">⏳</span><span class="ph-cp-name">Salida trasera</span><span class="ph-cp-time">—</span></div>
+        </div>
+      </div>
+      <div class="ph-bottom"><div class="ph-btri"></div><div class="ph-bdot"></div><div class="ph-bsq"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contacto">
+  <div class="cta-box">
+    <h2>¿Lo ponemos<br><span>en marcha?</span></h2>
+    <p>Cuéntame cuántos guardas tienes y te preparo una demo personalizada en 24 horas. Sin compromiso, sin coste inicial.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/34643223301?text=Hola%2C%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad%20privada%20y%20me%20interesa%20una%20demo" class="btn-wa" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.5l5.819-1.525A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.919 9.919 0 01-5.058-1.384l-.363-.215-3.754.984 1.003-3.651-.236-.374A9.865 9.865 0 012.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/></svg>
         Hablar por WhatsApp
       </a>
-      <a href="mailto:info@jmprestige.es?subject=Demo%20App%20Seguridad%20Privada" class="btn-email">
+      <a href="mailto:info@obracontrolgps.net?subject=Demo%20App%20Seguridad%20Privada" class="btn-email">
         ✉️ Enviar email
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <div class="footer-brand">JM PRESTIGE AI SOLUTIONS</div>
-    <div class="footer-sub">Soluciones digitales para pymes · Lleida, España</div>
-    <div class="footer-links">
-      <a href="https://obracontrol-tech.github.io/jmprestige" class="footer-link">Web</a>
-      <a href="https://wa.me/34643223301" class="footer-link">WhatsApp</a>
-    </div>
-  </footer>
-
-</div>
+<footer>
+  <div class="footer-brand">JM <span>Prestige</span> AI Solutions</div>
+  <p>Soluciones digitales para pymes · Lleida, España</p>
+  <p>© 2026</p>
+</footer>
 
 <script>
-  function getNombre() {
-    const params = new URLSearchParams(window.location.search);
-    const n = params.get('nombre') || params.get('name') || '';
-    return n.charAt(0).toUpperCase() + n.slice(1).toLowerCase();
+// Nombre dinámico desde URL ?nombre=Carlos
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const nombre = params.get('nombre');
+  if(nombre){
+    const el = document.getElementById('nombre-display');
+    if(el) el.textContent = nombre;
   }
-
-  const nombre = getNombre();
-  if (nombre) {
-    document.getElementById('nombre-display').textContent = nombre;
-    document.getElementById('cta-sub').textContent =
-      nombre + ', cuéntame cuántos guardas tienes y te preparo una demo personalizada en 24 horas.';
-    const wa = document.getElementById('whatsapp-btn');
-    wa.href = `https://wa.me/34643223301?text=Hola%2C%20soy%20${encodeURIComponent(nombre)}%20y%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad.%20Me%20interesa%20saber%20m%C3%A1s.`;
-  }
-
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hide');
-      setTimeout(() => {
-        document.getElementById('content').classList.add('show');
-        initReveal();
-      }, 700);
-    }, 2200);
-  });
-
-  function initReveal() {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-  }
-
-  function scrollToFeatures() {
-    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-  }
+})();
 </script>
 </body>
 </html>
