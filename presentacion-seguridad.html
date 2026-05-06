@@ -7,15 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #C8960C;
-    --gold-light: #F0C040;
-    --purple: #7c3aed;
+    --gold: #C9A227;
+    --gold-light: #D4AF37;
+    --purple: #1a3a6b;
     --red: #dc2626;
     --green: #4ade80;
-    --dark: #0E0E0E;
-    --dark2: #141420;
-    --dark3: #1e1e2e;
-    --gray: #888;
+    --dark: #0B1426;
+    --dark2: #0F1D35;
+    --dark3: #162444;
+    --gray: #7a8fa8;
     --white: #FFFFFF;
   }
 
@@ -63,7 +63,7 @@
   }
   .loader-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--purple), var(--gold-light));
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
     border-radius: 2px;
     animation: loadbar 1.8s ease forwards;
   }
@@ -94,8 +94,8 @@
     content: '';
     position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(124,58,237,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px);
+      linear-gradient(rgba(201,162,39,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px);
     background-size: 40px 40px;
     z-index: 0;
   }
@@ -105,7 +105,7 @@
     position: absolute;
     top: -100px; right: -100px;
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(201,162,39,0.07) 0%, transparent 70%);
     z-index: 0;
   }
 
@@ -129,7 +129,7 @@
 
   .nav-badge {
     background: var(--dark3);
-    border: 1px solid rgba(124,58,237,0.3);
+    border: 1px solid rgba(201,162,39,0.35);
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 11px;
@@ -161,11 +161,11 @@
     width: 160px;
     background: #0a0a1a;
     border-radius: 28px;
-    border: 3px solid rgba(124,58,237,0.4);
+    border: 3px solid rgba(201,162,39,0.4);
     box-shadow:
       0 0 0 1px rgba(255,255,255,0.06),
       0 20px 60px rgba(0,0,0,0.7),
-      0 0 40px rgba(124,58,237,0.1),
+      0 0 40px rgba(201,162,39,0.08),
       inset 0 1px 0 rgba(255,255,255,0.1);
     overflow: hidden;
     animation: floatPhone 3s ease-in-out infinite;
@@ -200,13 +200,13 @@
 
   .phone-app-icon {
     width: 36px; height: 36px;
-    background: linear-gradient(135deg, #7c3aed, #9d5cf7);
+    background: linear-gradient(135deg, #1a3a6b, #2a5298);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    box-shadow: 0 4px 12px rgba(124,58,237,0.5);
+    box-shadow: 0 4px 12px rgba(26,58,107,0.5);
     margin-top: 4px;
   }
 
@@ -488,7 +488,7 @@
     position: absolute;
     bottom: -50px; left: -50px;
     width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(26,58,107,0.08) 0%, transparent 70%);
   }
 
   .features-grid {
@@ -507,13 +507,13 @@
     overflow: hidden;
     transition: border-color 0.2s ease;
   }
-  .feature-card:hover { border-color: rgba(124,58,237,0.4); }
+  .feature-card:hover { border-color: rgba(201,162,39,0.4); }
   .feature-card::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--purple), var(--gold-light));
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
   }
 
   .feature-icon { font-size: 28px; margin-bottom: 10px; display: block; }
@@ -637,8 +637,8 @@
   }
   .caso-icon {
     width: 44px; height: 44px;
-    background: rgba(124,58,237,0.2);
-    border: 1px solid rgba(124,58,237,0.4);
+    background: rgba(26,58,107,0.3);
+    border: 1px solid rgba(201,162,39,0.4);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -679,7 +679,7 @@
   .final-cta::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(124,58,237,0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(26,58,107,0.15) 0%, transparent 70%);
   }
 
   .final-cta-title {
