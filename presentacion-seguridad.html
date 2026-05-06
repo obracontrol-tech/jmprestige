@@ -31,39 +31,62 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
 
 /* HERO */
-.hero{min-height:100vh;background:linear-gradient(160deg,#060610 0%,#0d0d22 60%,#060610 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9rem 6% 5rem;text-align:center;position:relative;overflow:hidden;}
+.hero{min-height:100vh;background:linear-gradient(160deg,#060610 0%,#0d0d22 60%,#060610 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;padding:9rem 6% 5rem;position:relative;overflow:hidden;}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,0.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
-.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.1) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:halopulse 6s ease-in-out infinite;}
-.hero-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,12,0.07) 0%,transparent 65%);top:20%;right:10%;pointer-events:none;}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.1) 0%,transparent 65%);top:50%;left:30%;transform:translate(-50%,-50%);pointer-events:none;animation:halopulse 6s ease-in-out infinite;}
+.hero-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,12,0.07) 0%,transparent 65%);top:20%;right:5%;pointer-events:none;}
 @keyframes halopulse{0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
 
+/* HERO LEFT */
+.hero-left{position:relative;z-index:2;}
 .hero-greeting{font-family:'Exo 2',sans-serif;font-size:0.95rem;font-weight:400;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp 0.5s ease both;}
 .hero-greeting strong{color:var(--gold-light);font-weight:700;}
 
 /* SHIELD SVG animado */
-.shield-wrap{margin:0 auto 2rem;animation:fadeUp 0.6s 0.1s ease both;position:relative;width:100px;height:100px;}
+.shield-wrap{margin:0 0 2rem;animation:fadeUp 0.6s 0.1s ease both;position:relative;width:100px;height:100px;}
 .shield-pulse{position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(124,58,237,0.3);animation:shieldring 3s ease-in-out infinite;}
 .shield-pulse2{position:absolute;inset:-24px;border-radius:50%;border:1px solid rgba(124,58,237,0.15);animation:shieldring 3s 0.5s ease-in-out infinite;}
 @keyframes shieldring{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:1.2rem;animation:fadeUp 0.6s 0.15s ease both;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:1.2rem;animation:fadeUp 0.6s 0.15s ease both;}
 .hero h1 em{color:var(--gold);font-style:normal;}
-.hero-sub{font-size:1rem;font-weight:300;color:var(--gray);line-height:1.75;max-width:580px;margin:0 auto 2.5rem;animation:fadeUp 0.6s 0.25s ease both;}
+.hero-sub{font-size:0.95rem;font-weight:300;color:var(--gray);line-height:1.75;max-width:480px;margin-bottom:2rem;animation:fadeUp 0.6s 0.25s ease both;}
 
 /* CLIENTE BANNER */
-.client-banner{display:inline-flex;align-items:center;gap:0.8rem;background:rgba(200,150,12,0.1);border:1px solid rgba(200,150,12,0.3);border-radius:8px;padding:0.7rem 1.4rem;margin-bottom:2.5rem;animation:fadeUp 0.6s 0.3s ease both;}
+.client-banner{display:inline-flex;align-items:center;gap:0.8rem;background:rgba(200,150,12,0.1);border:1px solid rgba(200,150,12,0.3);border-radius:8px;padding:0.7rem 1.4rem;margin-bottom:2rem;animation:fadeUp 0.6s 0.3s ease both;}
 .client-logo-text{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold-light);letter-spacing:0.08em;}
 .client-badge{font-family:'Exo 2',sans-serif;font-size:0.7rem;font-weight:600;background:rgba(74,222,128,0.15);color:var(--green);border:1px solid rgba(74,222,128,0.3);border-radius:20px;padding:0.2rem 0.7rem;}
 
-.hero-pills{display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;animation:fadeUp 0.6s 0.35s ease both;}
-.pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.65);padding:0.4rem 0.9rem;border-radius:20px;font-size:0.8rem;font-family:'Exo 2',sans-serif;font-weight:600;}
+.hero-pills{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem;animation:fadeUp 0.6s 0.35s ease both;}
+.pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.65);padding:0.4rem 0.9rem;border-radius:20px;font-size:0.78rem;font-family:'Exo 2',sans-serif;font-weight:600;}
 .pill.gold{background:rgba(200,150,12,0.12);border-color:rgba(200,150,12,0.35);color:var(--gold-light);}
 .pill.red{background:rgba(220,38,38,0.12);border-color:rgba(220,38,38,0.35);color:#fca5a5;}
 
-.btn-hero{display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#C8960C,#F0C040);color:#0a0a18;padding:1rem 2.5rem;border-radius:6px;font-weight:700;font-size:1rem;text-decoration:none;transition:all 0.25s;box-shadow:0 6px 30px rgba(200,150,12,0.35);animation:fadeUp 0.6s 0.4s ease both;}
+.btn-hero{display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#C8960C,#F0C040);color:#0a0a18;padding:1rem 2rem;border-radius:6px;font-weight:700;font-size:0.95rem;text-decoration:none;transition:all 0.25s;box-shadow:0 6px 30px rgba(200,150,12,0.35);animation:fadeUp 0.6s 0.4s ease both;}
 .btn-hero:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(200,150,12,0.5);}
 
+/* HERO RIGHT — móvil */
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;animation:fadeUp 0.8s 0.3s ease both;}
+
+/* Badges flotantes */
+.hero-badge-float{position:absolute;background:rgba(10,10,30,0.92);border:1px solid rgba(124,58,237,0.3);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:8px;z-index:3;}
+.hbf-icon{font-size:15px;}
+.hbf-text{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:600;color:rgba(255,255,255,0.85);}
+.hbf-sub{font-family:'Exo 2',sans-serif;font-size:8px;color:rgba(255,255,255,0.4);}
+.badge-tl{top:20px;left:-20px;}
+.badge-tr{top:90px;right:-30px;}
+.badge-br{bottom:50px;right:-35px;}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:8rem;}
+  .hero-right{margin-top:2rem;}
+  .shield-wrap{margin:0 auto 2rem;}
+  .hero-pills{justify-content:center;}
+  .hero-sub{margin-left:auto;margin-right:auto;}
+  .badge-tl,.badge-tr,.badge-br{display:none;}
+}
 
 /* CASO REAL */
 .caso-real{padding:5rem 6%;background:linear-gradient(135deg,#0d0d22,#12122e);position:relative;overflow:hidden;}
@@ -204,41 +227,88 @@ footer p{font-size:0.8rem;color:rgba(255,255,255,0.3);}
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
 
-  <div class="hero-greeting" id="hero-greeting">Hola, <strong id="nombre-display">amigo</strong></div>
+  <!-- IZQUIERDA -->
+  <div class="hero-left">
+    <div class="hero-greeting" id="hero-greeting">Hola, <strong id="nombre-display">amigo</strong></div>
 
-  <!-- Shield animado SVG -->
-  <div class="shield-wrap">
-    <div class="shield-pulse"></div>
-    <div class="shield-pulse2"></div>
-    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 8L14 22V48C14 68 30 84 50 92C70 84 86 68 86 48V22L50 8Z" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
-      <path d="M50 18L22 29V48C22 64 34 77 50 84C66 77 78 64 78 48V29L50 18Z" fill="rgba(124,58,237,0.1)" stroke="rgba(200,150,12,0.4)" stroke-width="1"/>
-      <path d="M38 50L46 58L62 42" stroke="#F0C040" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <div class="shield-wrap">
+      <div class="shield-pulse"></div>
+      <div class="shield-pulse2"></div>
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <path d="M50 8L14 22V48C14 68 30 84 50 92C70 84 86 68 86 48V22L50 8Z" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
+        <path d="M50 18L22 29V48C22 64 34 77 50 84C66 77 78 64 78 48V29L50 18Z" fill="rgba(124,58,237,0.1)" stroke="rgba(200,150,12,0.4)" stroke-width="1"/>
+        <path d="M38 50L46 58L62 42" stroke="#F0C040" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>Protege tu empresa.<br><em>Digitaliza tu servicio.</em></h1>
+    <p class="hero-sub">Control total de rondas, guardas y partes de servicio. GPS en tiempo real, botón de pánico y panel de mando. Todo desde el móvil, sin hardware adicional.</p>
+
+    <div class="client-banner">
+      <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 8L14 22V48C14 68 30 84 50 92C70 84 86 68 86 48V22L50 8Z" fill="rgba(200,150,12,0.3)" stroke="rgba(200,150,12,0.8)" stroke-width="2"/><path d="M38 50L46 58L62 42" stroke="#F0C040" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="client-logo-text">MARCIUS SEGURIDAD</span>
+      <span class="client-badge">✓ Ya usa esta app</span>
+    </div>
+
+    <div class="hero-pills">
+      <span class="pill">📍 GPS tiempo real</span>
+      <span class="pill">🔄 Rondas checkpoints</span>
+      <span class="pill gold">🆘 Botón de pánico</span>
+      <span class="pill">📄 Partes PDF</span>
+      <span class="pill red">🔫 Licencia armas</span>
+      <span class="pill">0€ hardware</span>
+    </div>
+
+    <a href="https://wa.me/34643223301?text=Hola%2C%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad%20y%20me%20interesa%20saber%20m%C3%A1s" class="btn-hero" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.5l5.819-1.525A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.919 9.919 0 01-5.058-1.384l-.363-.215-3.754.984 1.003-3.651-.236-.374A9.865 9.865 0 012.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/></svg>
+      Ver la solución
+    </a>
   </div>
 
-  <h1>Protege tu empresa.<br><em>Digitaliza tu servicio.</em></h1>
-  <p class="hero-sub">Control total de rondas, guardas y partes de servicio. GPS en tiempo real, botón de pánico y panel de mando. Todo desde el móvil, sin hardware adicional.</p>
+  <!-- DERECHA — móvil flotante -->
+  <div class="hero-right">
+    <div class="hero-badge-float badge-tl">
+      <span class="hbf-icon">📍</span>
+      <div><div class="hbf-text">GPS activo</div><div class="hbf-sub">Tiempo real</div></div>
+    </div>
+    <div class="hero-badge-float badge-tr">
+      <span class="hbf-icon">🌍</span>
+      <div><div class="hbf-text">Andalucía · Ceuta · Melilla</div><div class="hbf-sub">Cobertura total</div></div>
+    </div>
+    <div class="hero-badge-float badge-br">
+      <span class="hbf-icon">📄</span>
+      <div><div class="hbf-text">Parte PDF automático</div><div class="hbf-sub">1 clic · Listo para cliente</div></div>
+    </div>
 
-  <div class="client-banner">
-    <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 8L14 22V48C14 68 30 84 50 92C70 84 86 68 86 48V22L50 8Z" fill="rgba(200,150,12,0.3)" stroke="rgba(200,150,12,0.8)" stroke-width="2"/><path d="M38 50L46 58L62 42" stroke="#F0C040" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="client-logo-text">MARCIUS SEGURIDAD</span>
-    <span class="client-badge">✓ Ya usa esta app</span>
+    <div class="phone-outer" style="margin-top:0;">
+      <div class="phone-aura"></div>
+      <div class="phone-frame">
+        <div class="ph-notch"><div class="ph-cam"></div></div>
+        <div class="ph-screen">
+          <div class="ph-statusbar"><span>21:04</span><div class="ph-icons"><div class="ph-dot"></div><div class="ph-dot"></div><div class="ph-dot"></div></div></div>
+          <div class="ph-appbar">
+            <div class="ph-shield">🛡️</div>
+            <span class="ph-appname">Marcius Seguridad</span>
+            <div class="ph-live"></div>
+          </div>
+          <div class="ph-body">
+            <div class="ph-panicbtn">🆘 BOTÓN DE PÁNICO — 3s</div>
+            <div class="ph-gps">
+              <div class="ph-gps-dot"></div>
+              <span class="ph-gps-txt">GPS activo · Sevilla Centro · Turno activo</span>
+            </div>
+            <div class="ph-section-label">Ronda en curso</div>
+            <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Entrada principal</span><span class="ph-cp-time">21:00</span></div>
+            <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Zona aparcamiento</span><span class="ph-cp-time">21:08</span></div>
+            <div class="ph-checkpoint ok"><span class="ph-cp-icon">✅</span><span class="ph-cp-name">Planta baja</span><span class="ph-cp-time">21:15</span></div>
+            <div class="ph-checkpoint pending"><span class="ph-cp-icon">⏳</span><span class="ph-cp-name">Planta 1 · Zona B</span><span class="ph-cp-time">—</span></div>
+            <div class="ph-checkpoint pending"><span class="ph-cp-icon">⏳</span><span class="ph-cp-name">Acceso trasero</span><span class="ph-cp-time">—</span></div>
+          </div>
+        </div>
+        <div class="ph-bottom"><div class="ph-btri"></div><div class="ph-bdot"></div><div class="ph-bsq"></div></div>
+      </div>
+    </div>
   </div>
-
-  <div class="hero-pills">
-    <span class="pill">📍 GPS tiempo real</span>
-    <span class="pill">🔄 Rondas con checkpoints</span>
-    <span class="pill gold">🆘 Botón de pánico</span>
-    <span class="pill">📄 Partes PDF automáticos</span>
-    <span class="pill red">🔫 Licencia de armas</span>
-    <span class="pill">0€ hardware</span>
-  </div>
-
-  <a href="https://wa.me/34643223301?text=Hola%2C%20he%20visto%20la%20presentaci%C3%B3n%20de%20la%20app%20de%20seguridad%20y%20me%20interesa%20saber%20m%C3%A1s" class="btn-hero" target="_blank">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.5l5.819-1.525A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.919 9.919 0 01-5.058-1.384l-.363-.215-3.754.984 1.003-3.651-.236-.374A9.865 9.865 0 012.106 12C2.106 6.53 6.53 2.106 12 2.106S21.894 6.53 21.894 12 17.47 21.894 12 21.894z"/></svg>
-    Ver la solución
-  </a>
 </section>
 
 <!-- CASO REAL: MARCIUS -->
